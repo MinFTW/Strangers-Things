@@ -6,7 +6,110 @@
   padding: 0;
 }
 
-body {
+#container {
   font-family: 'Poppins', sans-serif;
+  display: grid;
+  grid-template-columns: 80% 1fr;
+  grid-template-rows: auto auto 1fr;
+  grid-gap: 0.5rem;
+  overflow: hidden;
+
+  width: min(100% - 2rem, 100vw);
+  height: 100vh;
+  margin-inline: auto;
+  line-height: 1.6;
+
+  border: solid #e76f51;
+  background-color: #023e8a;
+  color: white;
+}
+
+#title {
+  grid-row: 1;
+  grid-column: 1 / -1;
+  font-size: 1.3rem;
+  padding: 0.5rem;
   text-align: center;
+}
+
+.navbar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-evenly;
+  color: white;
+  font-size: 1.2rem;
+  padding: 1rem;
+}
+
+.posts {
+  padding: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+#register {
+  display: grid;
+  grid-template-columns: 98vw;
+  text-align: center;
+  margin-top: 3rem;
+  font-size: 1.2rem;
+  border: none;
+}
+
+#loginfield {
+  padding: 1rem;
+}
+
+#registerButton {
+  background-color: #25a18e;
+  color: white;
+
+  border-radius: 10px;
+  font-size: 1rem;
+  padding: 2px;
+  margin-top: 1rem;
+}
+
+#login {
+  background-color: #25a18e;
+  color: white;
+
+  border-radius: 10px;
+  font-size: 1rem;
+  padding: 2px;
+  margin-top: 0.5rem;
+}
+
+#logout {
+  background-color: #d64933;
+  color: white;
+
+  border-radius: 10px;
+  font-size: 1rem;
+  padding: 2px;
+  margin-top: 1rem;
+}
+
+#login:hover {
+  box-shadow: 0 0 5px 0.1rem white;
+}
+
+#login:active {
+  transform: translateY(0.3vh);
+}
+
+#logout:hover {
+  box-shadow: 0 0 5px 0.1rem white;
+}
+
+#logout:active {
+  transform: translateY(0.3vh);
+}
+
+#profile {
+  display: grid;
+  grid-template-columns: 98vw;
+  text-align: center;
+  margin-top: 3rem;
+  font-size: 1.2rem;
+  border: none;
 }
