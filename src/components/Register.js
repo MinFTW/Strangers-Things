@@ -20,7 +20,6 @@ const Register = ({ setToken }) => {
 
     if (password !== confirmPassword) {
       alert('passwords does not match');
-      return;
     }
 
     setUsername('');

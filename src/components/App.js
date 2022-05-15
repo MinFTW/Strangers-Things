@@ -1,44 +1,47 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { fetchPosts } from '../api';
-import { Title, PostList, Register, Login, Profile } from './index';
+import { Title, PostList, Register, Login, Profile, NewPost } from './index';
+import { fetchPosts, authenticateUser } from '../api';
 
 const App = () => {
   const [posts, setPosts] = useState([]);
+  const [isLoggedin, setIsLoggedin] = useState(false);
 
-  const [token, setToken] = useState('');
-  const localToken = localStorage.getItem('token');
-
-  useEffect(() => {
-    fetchPosts()
+  const handlePostList = async () => {
+    await fetchPosts()
       .then((result) => {
         setPosts(result);
       })
       .catch((error) => console.log(error));
-  }, []);
+  };
+
+  useEffect(() => {
+    handlePostList();
+  }, [isLoggedin]);
 
   return (
     <div id='container'>
       <Router>
-        <Title token={token} localToken={localToken} />
+        <Title isLoggedin={isLoggedin} setIsLoggedin={setIsLoggedin} />
         <Switch>
+          <Route exact path='/login'>
+            <Login setIsLoggedin={setIsLoggedin} />
+          </Route>
+
           <Route exact path='/register'>
-            <Register setToken={setToken} />
+            <Register />
+          </Route>
+
+          <Route exact path='/newpost'>
+            <NewPost />
           </Route>
 
           <Route exact path='/profile'>
-            <Profile localToken={localToken}/>
+            <Profile />
           </Route>
 
           <Route path='/'>
             <PostList posts={posts} />
-            {!localToken && (
-              <Login
-                setToken={setToken}
-                token={token}
-                localToken={localToken}
-              />
-            )}
           </Route>
         </Switch>
       </Router>

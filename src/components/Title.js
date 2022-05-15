@@ -1,14 +1,16 @@
 import React from 'react';
-import { Navbar } from './index';
-import StoreIcon from '@mui/icons-material/Store';
 import { red } from '@mui/material/colors';
+import StoreIcon from '@mui/icons-material/Store';
+import { Navbar } from './index';
 
-const Title = ({token, localToken}) => {
+const Title = ({ isLoggedin, setIsLoggedin }) => {
   return (
     <div id='title'>
-      <h1>Stranger's Things</h1>
-      <StoreIcon sx={{fontSize:60, color:red[500]}}/>
-      <Navbar token={token} localToken={localToken}/>
+      <h1>
+        Stranger's Things
+        <StoreIcon id='icon-logo' sx={{ fontSize: 60, color: red[500] }} />
+      </h1>
+      <Navbar isLoggedin={isLoggedin} setIsLoggedin={setIsLoggedin} />
     </div>
   );
 };

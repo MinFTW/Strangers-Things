@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
 import { loginUser } from '../api';
-import { Logout } from './index';
 
-const Login = ({ setToken, token, localToken }) => {
+const Login = ({ setIsLoggedin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   return (
-    <div id='loginfield'>
-      <h4>Log In</h4>
+    <fieldset id='loginfield'>
       <form
         onSubmit={async (event) => {
           event.preventDefault();
           const result = await loginUser(username, password);
 
-          setToken(result.data.token);
+          setIsLoggedin(result.data.token);
           localStorage.setItem('token', result.data.token);
           setUsername('');
           setPassword('');
@@ -48,10 +46,10 @@ const Login = ({ setToken, token, localToken }) => {
           ></input>
         </div>
         <button id='login' type='submit'>
-          Submit
+          Login
         </button>
       </form>
-    </div>
+    </fieldset>
   );
 };
 

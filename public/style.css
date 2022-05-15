@@ -8,14 +8,10 @@
 
 #container {
   font-family: 'Poppins', sans-serif;
-  display: grid;
-  grid-template-columns: 80% 1fr;
-  grid-template-rows: auto auto 1fr;
-  grid-gap: 0.5rem;
-  overflow: hidden;
+  display: flex;
+  flex-flow: column wrap;
 
-  width: min(100% - 2rem, 100vw);
-  height: 100vh;
+  width: min(100% - 2rem, 100%);
   margin-inline: auto;
   line-height: 1.6;
 
@@ -25,38 +21,48 @@
 }
 
 #title {
-  grid-row: 1;
-  grid-column: 1 / -1;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+
   font-size: 1.3rem;
   padding: 0.5rem;
   text-align: center;
+  border-bottom: solid #e76f51;
+  width: 100%;
+}
+
+#icon-logo {
+  position: relative;
+  top: 15px;
 }
 
 .navbar {
-  display: inline-flex;
-  align-items: center;
-  justify-content: space-evenly;
   color: white;
   font-size: 1.2rem;
   padding: 1rem;
+  text-decoration: none;
+}
+
+#post-list {
+  padding: 0.5rem;
+  margin-top: 1rem;
 }
 
 .posts {
   padding: 0.3rem;
   margin-bottom: 1rem;
+  border-top: solid #e76f51;
+  width: 50%;
 }
 
 #register {
-  display: grid;
-  grid-template-columns: 98vw;
-  text-align: center;
-  margin-top: 3rem;
-  font-size: 1.2rem;
-  border: none;
-}
-
-#loginfield {
+  border: solid #e76f51;
   padding: 1rem;
+  text-align: center;
+  height: 90vh;
+  font-size: 1.2rem;
 }
 
 #registerButton {
@@ -74,9 +80,17 @@
   color: white;
 
   border-radius: 10px;
-  font-size: 1rem;
+  font-size: 1.5rem;
   padding: 2px;
   margin-top: 0.5rem;
+}
+
+#loginfield {
+  border: solid #e76f51;
+  padding: 1rem;
+  text-align: center;
+  height: 90vh;
+  font-size: 1.5rem;
 }
 
 #logout {
@@ -106,10 +120,42 @@
 }
 
 #profile {
-  display: grid;
-  grid-template-columns: 98vw;
   text-align: center;
   margin-top: 3rem;
   font-size: 1.2rem;
   border: none;
+}
+
+#new-post {
+  text-align: center;
+  font-size: 1.2rem;
+  border: none;
+  height: 90vh;
+  width: 80%;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+#new-post input {
+  display: inline-block;
+}
+
+#new-post label {
+  width: 10%;
+  text-align: right;
+}
+
+#new-post input,
+input::placeholder {
+  font: 20px/2 sans-serif;
+}
+
+#new-post button {
+  background-color: #25a18e;
+  color: white;
+
+  border-radius: 10px;
+  font-size: 1.5rem;
+  padding: 2px;
+  margin-top: 0.5rem;
 }

@@ -5,7 +5,6 @@ const Profile = ({ localToken }) => {
   const [messages, setMessages] = useState([]);
 
   const data = fetchProfile(localToken);
-  console.log(data);
 
   return (
     <div id='profile'>

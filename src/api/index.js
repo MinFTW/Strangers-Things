@@ -2,8 +2,8 @@ const BASE_URL = 'https://strangers-things.herokuapp.com';
 const COHORT = '2202-FTB-ET-WEB-PT';
 
 export const fetchPosts = async () => {
-  let response = await fetch(`${BASE_URL}/api/${COHORT}/posts`);
-  let result = await response.json();
+  const response = await fetch(`${BASE_URL}/api/${COHORT}/posts`);
+  const result = await response.json();
 
   return result.data.posts;
 };
@@ -44,13 +44,38 @@ export const loginUser = async (username, password) => {
   return result;
 };
 
-export const fetchProfile = async (localToken) => {
+export const fetchProfile = async () => {
+  const token = localStorage.getItem('token');
+
   const response = await fetch(`${BASE_URL}/api/${COHORT}/users/me`, {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${localToken}`,
+      Authorization: `Bearer ${token}`,
     },
   });
+  const result = await response.json();
+
+  return result;
+};
+
+export const createNewPost = async (title, description, price) => {
+  const token = localStorage.getItem('token');
+
+  const response = await fetch(`${BASE_URL}/api/${COHORT}/posts`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      post: {
+        title,
+        description,
+        price,
+      },
+    }),
+  });
+
   const result = await response.json();
 
   return result;
