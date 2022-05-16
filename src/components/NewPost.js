@@ -1,12 +1,17 @@
-import { Button } from '@mui/material';
 import React, { useState } from 'react';
-import { createNewPost } from '../api';
+import { createPost } from '../api';
+import '../css/NewPost.css';
 
-const NewPost = ({ localToken }) => {
+const NewPost = ({ token }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
-//   const [willDeliver, setWillDeliver] = useState('');
+  const [location, setLocation] = useState('');
+  const [willDeliver, setWillDeliver] = useState(false);
+
+  const handleCheckbox = () => {
+    willDeliver === false ? setWillDeliver(true) : setWillDeliver(false);
+  };
 
   return (
     <div>
@@ -14,22 +19,19 @@ const NewPost = ({ localToken }) => {
         <form
           onSubmit={(event) => {
             event.preventDefault();
-            createNewPost(
-            //   localToken,
-              title,
-              description,
-              price,
-            //   willDeliver
-            );
+            createPost(title, description, price, location, willDeliver, token);
+            alert('Post created successfully');
+            setTitle('');
+            setDescription('');
+            setPrice('');
+            setLocation('');
           }}
         >
           <h2>New Post</h2>
           <div>
-            {/* <label htmlFor='title'>Title</label> */}
             <input
               type='text'
-              name='title'
-              placeholder='Enter a title'
+              placeholder='Add a title'
               minLength='1'
               maxLength='50'
               required
@@ -39,13 +41,11 @@ const NewPost = ({ localToken }) => {
           </div>
 
           <div>
-            {/* <label htmlFor='description'>Description</label> */}
             <input
               type='text'
-              name='description'
-              placeholder='Enter a description'
+              placeholder='Add description'
               minLength='1'
-              maxLength='50'
+              maxLength='200'
               required
               value={description}
               onChange={(event) => setDescription(event.target.value)}
@@ -53,11 +53,9 @@ const NewPost = ({ localToken }) => {
           </div>
 
           <div>
-            {/* <label htmlFor='price'>Price</label> */}
             <input
               type='text'
-              name='price'
-              placeholder='Enter a price'
+              placeholder='Enter price'
               minLength='1'
               maxLength='50'
               required
@@ -66,17 +64,33 @@ const NewPost = ({ localToken }) => {
             ></input>
           </div>
 
-          {/* <div>
-            <label htmlFor='willdeliver'>Will Deliver?</label>
+          <div>
             <input
               type='text'
-              name='willdeliver'
-              placeholder='Will Deliver?'
-              value={willDeliver}
-              onChange={(event) => setWillDeliver(event.target.value)}
+              placeholder='Location (optional)'
+              minLength='1'
+              maxLength='50'
+              value={location}
+              onChange={(event) => setLocation(event.target.value)}
             ></input>
-          </div> */}
-          <button type='submit'>Add Post</button>
+          </div>
+
+          <div>
+            <fieldset id='new-post-delivery'>
+              <legend>Will Deliver? (optional)</legend>
+              <label htmlFor='yes'>Yes</label>
+              <input
+                type='checkbox'
+                name='yes'
+                value={willDeliver}
+                onChange={(event) => {
+                  handleCheckbox(event);
+                }}
+              ></input>
+            </fieldset>
+          </div>
+
+          <button type='submit'>Submit Post</button>
         </form>
       </fieldset>
     </div>

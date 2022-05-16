@@ -1,38 +1,47 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
-import { registerUser } from '../api';
+import { useHistory } from 'react-router-dom';
+import { registerUser, loginUser } from '../api';
+import '../css/Register.css';
+import { Snackbar } from './index';
 
 const Register = ({ setToken }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const checkPassword = async (event) => {
-    event.preventDefault();
+  let history = useHistory();
+
+  const checkPassword = async () => {
+    if (password !== confirmPassword) {
+      return alert('Passwords do not match');
+    }
 
     if (username && password === confirmPassword) {
       const result = await registerUser(username, password);
 
+      if (result.data == null) {
+        return alert('User already registered, please login instead');
+      }
+
       setToken(result.data.token);
       localStorage.setItem('token', result.data.token);
-      alert('thank you for signup for our service!');
+      setUsername('');
+      setPassword('');
+      setConfirmPassword('');
+      alert('Thanks for signing up!');
+      await loginUser(username, password);
+      history.push('/home');
     }
-
-    if (password !== confirmPassword) {
-      alert('passwords does not match');
-    }
-
-    setUsername('');
-    setPassword('');
-    setConfirmPassword('');
   };
 
   return (
     <div>
+      <Snackbar />
       <fieldset id='register'>
         <form
           onSubmit={(event) => {
-            checkPassword(event);
+            event.preventDefault();
+            checkPassword();
           }}
         >
           <label htmlFor='username'>Username</label>
@@ -91,7 +100,6 @@ const Register = ({ setToken }) => {
           </button>
         </form>
       </fieldset>
-      {localStorage.token ? <Redirect to='/home' /> : null}
     </div>
   );
 };

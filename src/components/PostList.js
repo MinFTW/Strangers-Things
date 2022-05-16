@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import '../css/PostList.css';
 
 const PostList = ({ posts }) => {
   return (
@@ -11,7 +12,10 @@ const PostList = ({ posts }) => {
             <div>Description: {post.description}</div>
             <br />
             <div>Price: {post.price}</div>
-            <div>Location: {post.location === '[On Request]' ? 'On Request' : post.location}</div>
+            <div>
+              Location:{' '}
+              {post.location === '[On Request]' ? 'On Request' : post.location}
+            </div>
             <div>Delivery: {post.willDeliver ? 'yes' : 'no'}</div>
             <div>User: {post.author.username}</div>
           </div>

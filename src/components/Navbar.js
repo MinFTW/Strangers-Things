@@ -1,53 +1,58 @@
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+
 import { Button } from '@mui/material';
+import '../css/Navbar.css';
+import {
+  HomeIcon,
+  PostAddIcon,
+  AccountCircleIcon,
+  PersonAddIcon,
+  LoginIcon,
+  LogoutIcon,
+} from '../icons';
 
-import HomeIcon from '@mui/icons-material/Home';
-import PostAddIcon from '@mui/icons-material/PostAdd';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import LoginIcon from '@mui/icons-material/Login';
-import LogoutIcon from '@mui/icons-material/Logout';
+const Navbar = ({ token, setToken }) => {
+  let history = useHistory();
 
-const Navbar = ({ isLoggedin, setIsLoggedin }) => {
   return (
     <nav>
       <Link className='navbar' to='/home'>
         Home
-        <HomeIcon />
+        <HomeIcon id='icon-home' />
       </Link>
-      {!isLoggedin && (
+      {!token && (
         <Link className='navbar' to='/login'>
           Login
-          <LoginIcon />
+          <LoginIcon id='icon-login' />
         </Link>
       )}
-      {isLoggedin && (
+      {token && (
         <Link className='navbar' to='/newpost'>
-          Posts
-          <PostAddIcon />
+          Add New Post
+          <PostAddIcon id='icon-addpost' />
         </Link>
       )}
-      {isLoggedin && (
+      {token && (
         <Link className='navbar' to='/profile'>
           Profile
-          <AccountCircleIcon />
+          <AccountCircleIcon id='icon-profile' />
         </Link>
       )}
-      {!isLoggedin && (
+      {!token && (
         <Link className='navbar' to='/register'>
           Create Account
-          <PersonAddIcon />
+          <PersonAddIcon id='icon-register' />
         </Link>
       )}
-      {isLoggedin && (
+      {token && (
         <Button
           className='navbar'
           id='logout'
           onClick={() => {
-            setIsLoggedin('');
+            setToken('');
             localStorage.removeItem('token');
-            <Redirect to='/' />;
+            history.push('/home');
           }}
         >
           Logout

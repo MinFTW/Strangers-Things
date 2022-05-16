@@ -44,9 +44,7 @@ export const loginUser = async (username, password) => {
   return result;
 };
 
-export const fetchProfile = async () => {
-  const token = localStorage.getItem('token');
-
+export const fetchProfile = async (token) => {
   const response = await fetch(`${BASE_URL}/api/${COHORT}/users/me`, {
     headers: {
       'Content-Type': 'application/json',
@@ -58,9 +56,14 @@ export const fetchProfile = async () => {
   return result;
 };
 
-export const createNewPost = async (title, description, price) => {
-  const token = localStorage.getItem('token');
-
+export const createPost = async (
+  title,
+  description,
+  price,
+  location,
+  willDeliver,
+  token
+) => {
   const response = await fetch(`${BASE_URL}/api/${COHORT}/posts`, {
     method: 'POST',
     headers: {
@@ -72,10 +75,24 @@ export const createNewPost = async (title, description, price) => {
         title,
         description,
         price,
+        location,
+        willDeliver,
       },
     }),
   });
+  const result = await response.json();
 
+  return result;
+};
+
+export const deletePost = async (postId, token) => {
+  const response = await fetch(`${BASE_URL}/api/${COHORT}/posts/${postId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  });
   const result = await response.json();
 
   return result;

@@ -1,0 +1,11 @@
+#post-list {
+  padding: 0.5rem;
+  margin-top: 1rem;
+}
+
+.posts {
+  padding: 0.3rem;
+  margin-bottom: 1rem;
+  border-top: solid #e76f51;
+  width: 50%;
+}
