@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { registerUser, loginUser } from '../api';
-import '../css/Register.css';
 import { Snackbar } from './index';
+import '../css/Register.css';
 
 const Register = ({ setToken }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
   let history = useHistory();
 
   const checkPassword = async () => {
@@ -35,9 +34,9 @@ const Register = ({ setToken }) => {
   };
 
   return (
-    <div>
-      <Snackbar />
-      <fieldset id='register'>
+    <div id='register-page'>
+      <fieldset id='register-form'>
+      <legend>Create New Account</legend>
         <form
           onSubmit={(event) => {
             event.preventDefault();

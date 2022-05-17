@@ -1,0 +1,47 @@
+#myposts-page {
+  min-height: 100vh;
+}
+
+#myposts-header {
+  text-align: center;
+  font-size: 2.5rem;
+  margin: 1rem;
+}
+
+#myposts-container {
+  display: flex;
+  flex-flow: row wrap;
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+}
+
+#user-posts {
+  border: solid #e76f51;
+  width: 25vw;
+  margin: 0 auto;
+  padding: 0.5rem;
+  margin-bottom: 2rem;
+  border-radius: 10px;
+}
+
+#user-posts-deleted {
+  border: solid gray;
+  color: gray;
+  width: 25vw;
+  margin: 0 auto;
+  padding: 0.5rem;
+  margin-bottom: 2rem;
+  border-radius: 10px;
+}
+
+#delete-post-button {
+  margin-top: 1rem;
+}
+
+#user-messages {
+  border-top: solid #e76f51;
+  text-align: center;
+  margin: 1rem;
+}

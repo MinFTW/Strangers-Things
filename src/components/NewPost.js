@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { createPost } from '../api';
+import Button from '@mui/material/Button';
 import '../css/NewPost.css';
 
 const NewPost = ({ token }) => {
@@ -14,12 +15,13 @@ const NewPost = ({ token }) => {
   };
 
   return (
-    <div>
-      <fieldset id='new-post'>
+    <div id='new-post-page'>
+      <fieldset id='new-post-form'>
+        <legend>New Post</legend>
         <form
           onSubmit={(event) => {
             event.preventDefault();
-            createPost(title, description, price, location, willDeliver, token);
+            createPost(token, title, description, price, location, willDeliver);
             alert('Post created successfully');
             setTitle('');
             setDescription('');
@@ -27,52 +29,53 @@ const NewPost = ({ token }) => {
             setLocation('');
           }}
         >
-          <h2>New Post</h2>
           <div>
-            <input
+            <textarea
               type='text'
               placeholder='Add a title'
-              minLength='1'
               maxLength='50'
+              rows='1'
               required
               value={title}
               onChange={(event) => setTitle(event.target.value)}
-            ></input>
+            ></textarea>
           </div>
 
           <div>
-            <input
+            <textarea
+              id='input-description'
               type='text'
               placeholder='Add description'
-              minLength='1'
               maxLength='200'
+              rows='3'
+              cols='15'
               required
               value={description}
               onChange={(event) => setDescription(event.target.value)}
-            ></input>
+            ></textarea>
           </div>
 
           <div>
-            <input
+            <textarea
               type='text'
               placeholder='Enter price'
-              minLength='1'
               maxLength='50'
+              rows='1'
               required
               value={price}
               onChange={(event) => setPrice(event.target.value)}
-            ></input>
+            ></textarea>
           </div>
 
           <div>
-            <input
+            <textarea
               type='text'
               placeholder='Location (optional)'
-              minLength='1'
               maxLength='50'
+              rows='1'
               value={location}
               onChange={(event) => setLocation(event.target.value)}
-            ></input>
+            ></textarea>
           </div>
 
           <div>
@@ -90,7 +93,14 @@ const NewPost = ({ token }) => {
             </fieldset>
           </div>
 
-          <button type='submit'>Submit Post</button>
+          <Button
+            id='new-post-button'
+            type='submit'
+            variant='contained'
+            color='success'
+          >
+            Submit Post
+          </Button>
         </form>
       </fieldset>
     </div>

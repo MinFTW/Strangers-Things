@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import { Title, PostList, Register, Login, Profile, NewPost } from './index';
-import { fetchPosts } from '../api';
+import { Title, PostList, Register, Login, MyPosts, NewPost, MyMessages } from './index';
 import '../css/App.css';
 
 const App = () => {
@@ -11,12 +10,6 @@ const App = () => {
   const localStorageToken = localStorage.getItem('token');
 
   useEffect(() => {
-    const renderPosts = async () => {
-      const result = await fetchPosts();
-      setPosts(result);
-    };
-    renderPosts();
-
     localStorageToken && setToken(localStorageToken);
   }, [token]);
 
@@ -33,16 +26,20 @@ const App = () => {
             <Register setToken={setToken} />
           </Route>
 
+          <Route exact path='/myposts'>
+            <MyPosts token={token} localStorageToken={localStorageToken} />
+          </Route>
+
           <Route exact path='/newpost'>
             <NewPost token={token} />
           </Route>
 
-          <Route exact path='/profile'>
-            <Profile token={token} localStorageToken={localStorageToken} />
+          <Route exact path='/mymessages'>
+            <MyMessages token={token} localStorageToken={localStorageToken} />
           </Route>
 
           <Route path='/'>
-            <PostList posts={posts} />
+            <PostList posts={posts} setPosts={setPosts} />
           </Route>
         </Switch>
       </Router>

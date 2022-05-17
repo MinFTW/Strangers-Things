@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { fetchPosts } from '../api';
 import '../css/PostList.css';
 
-const PostList = ({ posts }) => {
+const PostList = ({ posts, setPosts }) => {
+  useEffect(() => {
+    const renderPosts = async () => {
+      const result = await fetchPosts();
+      setPosts(result);
+    };
+    renderPosts();
+  }, []);
+
   return (
     <div id='post-list'>
       <h2>Items</h2>
@@ -17,7 +26,9 @@ const PostList = ({ posts }) => {
               {post.location === '[On Request]' ? 'On Request' : post.location}
             </div>
             <div>Delivery: {post.willDeliver ? 'yes' : 'no'}</div>
+            <br />
             <div>User: {post.author.username}</div>
+            <div>Created: {post.createdAt.slice(0, 10)}</div>
           </div>
         );
       })}

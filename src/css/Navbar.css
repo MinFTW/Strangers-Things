@@ -12,7 +12,8 @@
 #icon-home,
 #icon-login,
 #icon-addpost,
-#icon-profile,
+#icon-myposts,
+#icon-mymessages,
 #icon-register {
   position: relative;
   top: 5px;
@@ -26,6 +27,7 @@
   border-radius: 10px;
   font-size: 1rem;
   padding: 2px;
+  margin-left: 2rem;
   margin-top: 1rem;
 }
 

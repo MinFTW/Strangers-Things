@@ -6,8 +6,9 @@ import '../css/Navbar.css';
 import {
   HomeIcon,
   PostAddIcon,
-  AccountCircleIcon,
   PersonAddIcon,
+  FaceIcon,
+  MailIcon,
   LoginIcon,
   LogoutIcon,
 } from '../icons';
@@ -21,30 +22,42 @@ const Navbar = ({ token, setToken }) => {
         Home
         <HomeIcon id='icon-home' />
       </Link>
+
       {!token && (
         <Link className='navbar' to='/login'>
           Login
           <LoginIcon id='icon-login' />
         </Link>
       )}
+
       {token && (
         <Link className='navbar' to='/newpost'>
           Add New Post
           <PostAddIcon id='icon-addpost' />
         </Link>
       )}
+
       {token && (
-        <Link className='navbar' to='/profile'>
-          Profile
-          <AccountCircleIcon id='icon-profile' />
+        <Link className='navbar' to='/myposts'>
+          My Posts
+          <FaceIcon id='icon-myposts' />
         </Link>
       )}
+
+      {token && (
+        <Link className='navbar' to='/mymessages'>
+          My Messages
+          <MailIcon id='icon-mymessages' />
+        </Link>
+      )}
+
       {!token && (
         <Link className='navbar' to='/register'>
           Create Account
           <PersonAddIcon id='icon-register' />
         </Link>
       )}
+
       {token && (
         <Button
           className='navbar'
