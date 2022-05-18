@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { createPost } from '../api';
 import Button from '@mui/material/Button';
 import '../css/NewPost.css';
@@ -9,9 +10,20 @@ const NewPost = ({ token }) => {
   const [price, setPrice] = useState('');
   const [location, setLocation] = useState('');
   const [willDeliver, setWillDeliver] = useState(false);
+  let history = useHistory();
 
   const handleCheckbox = () => {
     willDeliver === false ? setWillDeliver(true) : setWillDeliver(false);
+  };
+
+  const handleNewPost = async () => {
+    await createPost(token, title, description, price, location, willDeliver);
+    setTitle('');
+    setDescription('');
+    setPrice('');
+    setLocation('');
+    alert('Post created successfully');
+    history.push('/myposts');
   };
 
   return (
@@ -21,12 +33,7 @@ const NewPost = ({ token }) => {
         <form
           onSubmit={(event) => {
             event.preventDefault();
-            createPost(token, title, description, price, location, willDeliver);
-            alert('Post created successfully');
-            setTitle('');
-            setDescription('');
-            setPrice('');
-            setLocation('');
+            handleNewPost();
           }}
         >
           <div>

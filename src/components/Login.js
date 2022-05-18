@@ -10,6 +10,19 @@ const Login = ({ setToken }) => {
 
   let history = useHistory();
 
+  const handleLogin = async () => {
+    const result = await loginUser(username, password);
+
+    if (result.data != null) {
+      setToken(result.data.token);
+      localStorage.setItem('token', result.data.token);
+      alert('Login successful');
+      history.push('/home');
+    } else {
+      alert(`Username or password is incorrect, please try again`);
+    }
+  }
+
   return (
     <div id='login-page'>
       <fieldset id='login-form'>
@@ -17,16 +30,7 @@ const Login = ({ setToken }) => {
         <form
           onSubmit={async (event) => {
             event.preventDefault();
-            const result = await loginUser(username, password);
-
-            if (result.data != null) {
-              setToken(result.data.token);
-              localStorage.setItem('token', result.data.token);
-              alert('Login successful');
-              history.push('/home');
-            } else {
-              alert(`Username or password is incorrect, please try again`);
-            }
+            handleLogin();
           }}
         >
           <label>Username</label>

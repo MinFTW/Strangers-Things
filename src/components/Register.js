@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { registerUser, loginUser } from '../api';
+import Button from '@mui/material/Button';
 import { Snackbar } from './index';
 import '../css/Register.css';
 
@@ -24,9 +25,6 @@ const Register = ({ setToken }) => {
 
       setToken(result.data.token);
       localStorage.setItem('token', result.data.token);
-      setUsername('');
-      setPassword('');
-      setConfirmPassword('');
       alert('Thanks for signing up!');
       await loginUser(username, password);
       history.push('/home');
@@ -36,7 +34,7 @@ const Register = ({ setToken }) => {
   return (
     <div id='register-page'>
       <fieldset id='register-form'>
-      <legend>Create New Account</legend>
+        <legend>Create New Account</legend>
         <form
           onSubmit={(event) => {
             event.preventDefault();
@@ -94,9 +92,14 @@ const Register = ({ setToken }) => {
             ></input>
           </div>
 
-          <button type='submit' id='registerButton'>
+          <Button
+            type='submit'
+            id='register-button'
+            variant='contained'
+            color='success'
+          >
             Sign Up
-          </button>
+          </Button>
         </form>
       </fieldset>
     </div>

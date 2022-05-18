@@ -5,8 +5,8 @@ import { Button } from '@mui/material';
 import '../css/Navbar.css';
 import {
   HomeIcon,
+  FormatListBulletedIcon,
   PostAddIcon,
-  PersonAddIcon,
   FaceIcon,
   MailIcon,
   LoginIcon,
@@ -21,6 +21,11 @@ const Navbar = ({ token, setToken }) => {
       <Link className='navbar' to='/home'>
         Home
         <HomeIcon id='icon-home' />
+      </Link>
+
+      <Link className='navbar' to='/posts'>
+        Posts
+        <FormatListBulletedIcon id='icon-list' />
       </Link>
 
       {!token && (
@@ -52,16 +57,15 @@ const Navbar = ({ token, setToken }) => {
       )}
 
       {!token && (
-        <Link className='navbar' to='/register'>
+        <Link id='link-register' className='navbar' to='/register'>
           Create Account
-          <PersonAddIcon id='icon-register' />
         </Link>
       )}
 
       {token && (
         <Button
+          id='logout-button'
           className='navbar'
-          id='logout'
           onClick={() => {
             setToken('');
             localStorage.removeItem('token');

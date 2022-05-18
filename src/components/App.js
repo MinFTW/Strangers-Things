@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import { Title, PostList, Register, Login, MyPosts, NewPost, MyMessages } from './index';
+import {
+  Title,
+  PostList,
+  Register,
+  Login,
+  MyPosts,
+  NewPost,
+  MyMessages,
+  Footer,
+  FrontPage,
+} from './index';
 import '../css/App.css';
 
 const App = () => {
@@ -18,6 +28,10 @@ const App = () => {
       <Router>
         <Title token={token} setToken={setToken} />
         <Switch>
+          <Route exact path='/posts'>
+            <PostList posts={posts} setPosts={setPosts} />
+          </Route>
+
           <Route exact path='/login'>
             <Login token={token} setToken={setToken} />
           </Route>
@@ -39,9 +53,10 @@ const App = () => {
           </Route>
 
           <Route path='/'>
-            <PostList posts={posts} setPosts={setPosts} />
+            <FrontPage />
           </Route>
         </Switch>
+        <Footer />
       </Router>
     </div>
   );

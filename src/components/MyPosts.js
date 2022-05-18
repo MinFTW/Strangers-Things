@@ -26,16 +26,16 @@ const MyPosts = ({ token, localStorageToken }) => {
 
   return (
     <div id='myposts-page'>
-      <h2 id='myposts-header'>My Posts</h2>
+      <h2 id='myposts-title'>My Posts</h2>
       <div id='myposts-container'>
         {userPosts.map((post, index) => {
           if (post.active) {
             return (
-              <div key={index} id='user-posts'>
+              <div key={index} id='user-posts-active'>
                 <h2>Active Post</h2>
                 <p>Title: {post.title}</p>
                 <p>Description: {post.description}</p>
-                <br></br>
+                <br />
                 <p>Price: {post.price}</p>
                 <p>
                   Location:{' '}
@@ -44,7 +44,8 @@ const MyPosts = ({ token, localStorageToken }) => {
                     : post.location}
                 </p>
                 <p>Delivery: {post.willDeliver ? 'yes' : 'no'}</p>
-                <p>{post.created}</p>
+                <p>Created: {post.createdAt.slice(0, 10)}</p>
+
                 <Button
                   id='delete-post-button'
                   type='submit'
@@ -58,9 +59,7 @@ const MyPosts = ({ token, localStorageToken }) => {
                 </Button>
               </div>
             );
-          } 
-          
-          else {
+          } else {
             return (
               <div key={index} id='user-posts-deleted'>
                 <h2>Deleted Post</h2>

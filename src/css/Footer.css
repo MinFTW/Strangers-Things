@@ -1,0 +1,23 @@
+footer {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-end;
+  align-items: center;
+
+  border-top: solid #fa7458;
+  height: 10vh;
+  padding: 5px;
+}
+
+footer p {
+  margin-right: 2rem;
+}
+
+footer h4 {
+  margin: 1rem;
+}
+
+footer img {
+  width: 50px;
+  border-radius: 50%;
+}

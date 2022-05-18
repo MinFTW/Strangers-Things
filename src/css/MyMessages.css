@@ -1,7 +1,9 @@
 #mymessages-page {
-  min-height: 100vh;
+  min-height: 79vh;
 }
 
 #user-messages {
-    border: none;
+  border-top: none;
+  text-align: center;
+  margin: 1rem;
 }

@@ -1,11 +1,11 @@
 #new-post-page {
-  height: 100vh;
+  height: 79vh;
 }
 
 #new-post-form {
   display: flex;
   justify-content: center;
-  border: solid #e76f51;
+  border: solid #fa7458;
   margin: 0 auto;
 
   width: 25%;
@@ -14,7 +14,7 @@
   margin-top: 2rem;
 }
 
-textarea {
+#new-post-form textarea {
   resize: none;
   display: block;
   margin: 0 auto;
@@ -23,7 +23,7 @@ textarea {
   margin-bottom: 0.5rem;
 }
 
-input {
+#new-post-form input {
   margin: 0.5rem;
   padding: 0.2rem;
 }

@@ -1,11 +1,11 @@
 #login-page {
-  height: 100vh;
+  height: 79vh;
 }
 
 #login-form {
   display: flex;
   justify-content: center;
-  border: solid #e76f51;
+  border: solid #fa7458;
   margin: 0 auto;
 
   width: 25%;

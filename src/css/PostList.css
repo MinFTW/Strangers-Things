@@ -1,11 +1,22 @@
 #post-list {
+  overflow-y: scroll;
   margin-top: 1rem;
   padding: 0.5rem;
+  height: 77vh;
+}
+
+#post-list::-webkit-scrollbar {
+  display: none;
+}
+
+#post-list {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .posts {
-  border-top: solid #e76f51;
+  border-top: solid #fa7458;
   margin-bottom: 1rem;
   padding: 0.3rem;
-  width: 60%;
+  width: 50%;
 }
