@@ -45,10 +45,6 @@
   margin-bottom: 0.5rem;
 }
 
-#new-post-button:hover {
-  box-shadow: 0 0 5px 0.1rem white;
-}
-
 #new-post-button:active {
   transform: translateY(0.3vh);
 }

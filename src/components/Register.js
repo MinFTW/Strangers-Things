@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { registerUser, loginUser } from '../api';
 import Button from '@mui/material/Button';
-import { Snackbar } from './index';
 import '../css/Register.css';
 
 const Register = ({ setToken }) => {

@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { fetchPosts } from '../api';
+import { MessageDialog } from './index';
 import '../css/PostList.css';
 
-const PostList = ({ posts, setPosts }) => {
+const PostList = ({ token, posts, setPosts }) => {
   useEffect(() => {
     const renderPosts = async () => {
       const result = await fetchPosts();
@@ -12,21 +13,26 @@ const PostList = ({ posts, setPosts }) => {
   }, []);
 
   const handlePosts = () => {
-    return posts.map((post) => {
+    return posts.reverse().map((post) => {
       return (
         <div key={post._id} className='posts'>
           <h3>{post.title}</h3>
-          <div>Description: {post.description}</div>
+          <p>Description: {post.description}</p>
           <br />
-          <div>Price: {post.price}</div>
-          <div>
+          <p>Price: {post.price}</p>
+          <p>
             Location:{' '}
             {post.location === '[On Request]' ? 'On Request' : post.location}
-          </div>
-          <div>Delivery: {post.willDeliver ? 'yes' : 'no'}</div>
+          </p>
+          <p>Delivery: {post.willDeliver ? 'yes' : 'no'}</p>
           <br />
-          <div>User: {post.author.username}</div>
-          <div>Created: {post.createdAt.slice(0, 10)}</div>
+          <p>User: {post.author.username}</p>
+          <p>
+            Created:{' '}
+            {post.createdAt.slice(5, 10) + '-' + post.createdAt.slice(0, 4)}
+          </p>
+          
+          {token && <MessageDialog token={token} post={post}/>}
         </div>
       );
     });

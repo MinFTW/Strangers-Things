@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
-
 import { Button } from '@mui/material';
 import '../css/Navbar.css';
 import {
@@ -13,7 +12,7 @@ import {
   LogoutIcon,
 } from '../icons';
 
-const Navbar = ({ token, setToken }) => {
+const Navbar = ({ token, setToken, setUsername, setPassword }) => {
   let history = useHistory();
 
   return (
@@ -69,6 +68,8 @@ const Navbar = ({ token, setToken }) => {
           onClick={() => {
             setToken('');
             localStorage.removeItem('token');
+            setUsername('');
+            setPassword('');
             history.push('/home');
           }}
         >

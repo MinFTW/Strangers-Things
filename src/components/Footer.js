@@ -11,7 +11,7 @@ const Footer = () => {
       <h4>Project by Minsung</h4>
       <a href='https://github.com/MinFTW/Strangers-Things' target='_blank'>
         <img
-          src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
+          src='https://bit.ly/3yLBquY'
           alt='GitHub'
         />
       </a>

@@ -22,10 +22,6 @@
   margin-bottom: 0.5rem;
 }
 
-#login-button:hover {
-  box-shadow: 0 0 5px 0.1rem white;
-}
-
 #login-button:active {
   transform: translateY(0.3vh);
 }

@@ -4,20 +4,26 @@
 
 #myposts-title {
   text-align: center;
-  font-size: 2rem;
-  margin: 1rem;
+  margin-top: 1rem;
 }
 
 #myposts-container {
   display: flex;
   flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+
   margin-top: 1rem;
   font-size: 1.2rem;
   padding: 0.5rem;
 }
 
 #user-posts-active {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
   border: solid #fa7458;
   width: 25vw;
   margin: 0 auto;
@@ -36,8 +42,15 @@
   border-radius: 10px;
 }
 
-#delete-post-button {
-  margin-top: 1rem;
+#delete-post-button:active {
+  transform: translateY(0.3vh);
 }
 
+#dialog-update-post {
+  margin: 1rem;
+}
 
+#dialog-update-post:active {
+  transform: translateY(0.3vh);
+
+}

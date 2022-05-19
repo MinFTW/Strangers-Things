@@ -1,27 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { loginUser } from '../api';
 import Button from '@mui/material/Button';
 import '../css/Login.css';
 
-const Login = ({ setToken }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-
+const Login = ({ setToken, username, setUsername, password, setPassword }) => {
   let history = useHistory();
 
   const handleLogin = async () => {
     const result = await loginUser(username, password);
 
-    if (result.data != null) {
+    if (result.data) {
       setToken(result.data.token);
+      localStorage.setItem('username', username);
       localStorage.setItem('token', result.data.token);
       alert('Login successful');
       history.push('/home');
     } else {
       alert(`Username or password is incorrect, please try again`);
     }
-  }
+  };
 
   return (
     <div id='login-page'>

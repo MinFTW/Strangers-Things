@@ -9,5 +9,6 @@ export { default as MyPosts } from './MyPosts';
 export { default as NewPost } from './NewPost';
 export { default as MyMessages } from './MyMessages';
 export { default as Footer } from './Footer';
-export { default as Snackbar } from './Snackbar';
-
+export { default as MessageDialog } from './mui/Message_Dialog';
+export { default as UpdateDialog } from './mui/Update_Dialog';
+export { default as Snackbar } from './mui/Snackbar';

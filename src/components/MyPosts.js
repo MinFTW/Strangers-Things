@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchProfile, deletePost } from '../api';
+import { UpdateDialog } from './index';
 import { Button } from '@mui/material';
 import '../css/MyPosts.css';
 
@@ -26,9 +27,9 @@ const MyPosts = ({ token, localStorageToken }) => {
 
   return (
     <div id='myposts-page'>
-      <h2 id='myposts-title'>My Posts</h2>
+      <h2 id='myposts-title'>Your Posts</h2>
       <div id='myposts-container'>
-        {userPosts.map((post, index) => {
+        {userPosts.reverse().map((post, index) => {
           if (post.active) {
             return (
               <div key={index} id='user-posts-active'>
@@ -44,7 +45,14 @@ const MyPosts = ({ token, localStorageToken }) => {
                     : post.location}
                 </p>
                 <p>Delivery: {post.willDeliver ? 'yes' : 'no'}</p>
-                <p>Created: {post.createdAt.slice(0, 10)}</p>
+                <p>
+                  Created:{' '}
+                  {post.createdAt.slice(5, 10) +
+                    '-' +
+                    post.createdAt.slice(0, 4)}
+                </p>
+
+                <UpdateDialog post={post} token={token} fetchUserPosts={fetchUserPosts}/>
 
                 <Button
                   id='delete-post-button'
@@ -55,7 +63,7 @@ const MyPosts = ({ token, localStorageToken }) => {
                     handleDeletePost(post);
                   }}
                 >
-                  Delete Post
+                  Delete
                 </Button>
               </div>
             );
@@ -74,7 +82,12 @@ const MyPosts = ({ token, localStorageToken }) => {
                     : post.location}
                 </p>
                 <p>Delivery: {post.willDeliver ? 'yes' : 'no'}</p>
-                <p>Created: {post.createdAt.slice(0, 10)}</p>
+                <p>
+                  Created:{' '}
+                  {post.createdAt.slice(5, 10) +
+                    '-' +
+                    post.createdAt.slice(0, 4)}
+                </p>
               </div>
             );
           }

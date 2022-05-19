@@ -40,10 +40,6 @@
   margin-top: 1rem;
 }
 
-#logout:hover {
-  box-shadow: 0 0 5px 0.1rem white;
-}
-
-#logout:active {
+#logout-button:active {
   transform: translateY(0.3vh);
 }

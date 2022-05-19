@@ -5,18 +5,21 @@
   height: 77vh;
 }
 
-#post-list::-webkit-scrollbar {
-  display: none;
-}
-
-#post-list {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
 .posts {
   border-top: solid #fa7458;
   margin-bottom: 1rem;
   padding: 0.3rem;
   width: 50%;
+}
+
+#send-message-button {
+  margin-top: 0.5rem;
+}
+
+#send-message-button:active {
+  transform: translateY(0.3vh);
+}
+
+#dialog-message {
+  margin-top: 0.5rem;
 }

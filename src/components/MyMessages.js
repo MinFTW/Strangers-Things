@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { fetchProfile } from '../api';
 import '../css/MyMessages.css';
 
-const MyMessages = ({ localStorageToken }) => {
+const MyMessages = ({ localStorageToken, username }) => {
   const [messages, setMessages] = useState([]);
 
   const getMessages = async () => {
@@ -10,17 +10,30 @@ const MyMessages = ({ localStorageToken }) => {
     setMessages(response.data.messages);
   };
 
-  const handleMessages = () => {
-    messages.map((message, index) => {
-      return (
-        <div key={index}>
-          <h3>Message #{`${index}`}</h3>
-          <h4>{message.content}</h4>
-          <p>From: {message.fromUser}</p>
-          <p>Sent: {message.createdAt.slice(0, 10)}</p>
-          <p></p>
-        </div>
-      );
+  const handleInbox = () => {
+    return messages.reverse().map((message, index) => {
+      if (username !== message.fromUser.username) {
+        return (
+          <div key={index} className='messages'>
+            <p>For Item: {message.post.title}</p>
+            <p>Message: {message.content}</p>
+            <p>From: {message.fromUser.username}</p>
+          </div>
+        );
+      }
+    });
+  };
+
+  const handleSentMessages = () => {
+    return messages.map((message, index) => {
+      if (username === message.fromUser.username) {
+        return (
+          <div key={index} className='messages'>
+            <p>For Item: {message.post.title}</p>
+            <p>Message: {message.content}</p>
+          </div>
+        );
+      }
     });
   };
 
@@ -29,13 +42,11 @@ const MyMessages = ({ localStorageToken }) => {
   }, []);
 
   return (
-    <div id='mymessages-page'>
-      {
-        <div id='user-messages'>
-          <h2>Your Messages</h2>
-          {messages ? 'You have no messages' : handleMessages()}
-        </div>
-      }
+    <div id='message-list'>
+      <h2>Inbox</h2>
+      {messages.length === 0 ? 'You have no messages' : handleInbox()}
+      <h2>Sent Messages</h2>
+      {handleSentMessages()}
     </div>
   );
 };

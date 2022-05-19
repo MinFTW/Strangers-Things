@@ -1,9 +1,19 @@
-#mymessages-page {
+#message-list {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  overflow-y: scroll;
+
   min-height: 79vh;
+  margin-top: 1rem;
+  padding: 0.5rem;
 }
 
-#user-messages {
-  border-top: none;
-  text-align: center;
-  margin: 1rem;
+.messages {
+  border: solid #fa7458;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  padding: 0.3rem;
+  width: 20vw;
+  font-size: 1.2rem;
 }

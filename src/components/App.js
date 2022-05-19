@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
+import '../css/App.css';
 import {
   Title,
   PostList,
@@ -12,28 +12,43 @@ import {
   Footer,
   FrontPage,
 } from './index';
-import '../css/App.css';
 
 const App = () => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const localStorageToken = localStorage.getItem('token');
+  const localStorageUserName = localStorage.getItem('username');
 
   useEffect(() => {
     localStorageToken && setToken(localStorageToken);
+    localStorageToken && setUsername(localStorageUserName);
   }, [token]);
 
   return (
     <div id='app'>
       <Router>
-        <Title token={token} setToken={setToken} />
+        <Title
+          token={token}
+          setToken={setToken}
+          setUsername={setUsername}
+          setPassword={setPassword}
+        />
         <Switch>
           <Route exact path='/posts'>
-            <PostList posts={posts} setPosts={setPosts} />
+            <PostList token={token} posts={posts} setPosts={setPosts} />
           </Route>
 
           <Route exact path='/login'>
-            <Login token={token} setToken={setToken} />
+            <Login
+              token={token}
+              setToken={setToken}
+              username={username}
+              setUsername={setUsername}
+              password={password}
+              setPassword={setPassword}
+            />
           </Route>
 
           <Route exact path='/register'>
@@ -49,7 +64,10 @@ const App = () => {
           </Route>
 
           <Route exact path='/mymessages'>
-            <MyMessages token={token} localStorageToken={localStorageToken} />
+            <MyMessages
+              localStorageToken={localStorageToken}
+              username={username}
+            />
           </Route>
 
           <Route path='/'>

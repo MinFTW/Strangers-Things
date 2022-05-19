@@ -18,10 +18,6 @@ const NewPost = ({ token }) => {
 
   const handleNewPost = async () => {
     await createPost(token, title, description, price, location, willDeliver);
-    setTitle('');
-    setDescription('');
-    setPrice('');
-    setLocation('');
     alert('Post created successfully');
     history.push('/myposts');
   };
