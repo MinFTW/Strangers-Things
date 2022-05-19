@@ -23,7 +23,7 @@ const App = () => {
 
   useEffect(() => {
     localStorageToken && setToken(localStorageToken);
-    localStorageToken && setUsername(localStorageUserName);
+    localStorageUserName && setUsername(localStorageUserName);
   }, [token]);
 
   return (
@@ -37,7 +37,7 @@ const App = () => {
         />
         <Switch>
           <Route exact path='/posts'>
-            <PostList token={token} posts={posts} setPosts={setPosts} />
+            <PostList token={token} posts={posts} setPosts={setPosts} username={username} />
           </Route>
 
           <Route exact path='/login'>

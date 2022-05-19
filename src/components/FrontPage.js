@@ -2,7 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 
-export default function SimpleContainer() {
+const FrontPage = () => {
   return (
     <React.Fragment>
       <Container maxWidth={false}>
@@ -20,4 +20,6 @@ export default function SimpleContainer() {
       </Container>
     </React.Fragment>
   );
-}
+};
+
+export default FrontPage;

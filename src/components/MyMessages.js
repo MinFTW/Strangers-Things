@@ -1,52 +1,120 @@
-import React, { useEffect, useState } from 'react';
+import * as React from 'react';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import { useEffect, useState } from 'react';
 import { fetchProfile } from '../api';
 import '../css/MyMessages.css';
 
 const MyMessages = ({ localStorageToken, username }) => {
-  const [messages, setMessages] = useState([]);
+  const [inbox, setInbox] = useState([]);
+  const [outbox, setOutbox] = useState([]);
 
-  const getMessages = async () => {
+  const getInbox = async () => {
     const response = await fetchProfile(localStorageToken);
-    setMessages(response.data.messages);
+    const messages = response.data.messages;
+    const filteredMessages = messages.filter(
+      (message) => message.fromUser.username !== username
+    );
+
+    setInbox(filteredMessages);
   };
 
   const handleInbox = () => {
-    return messages.reverse().map((message, index) => {
-      if (username !== message.fromUser.username) {
-        return (
-          <div key={index} className='messages'>
-            <p>For Item: {message.post.title}</p>
-            <p>Message: {message.content}</p>
-            <p>From: {message.fromUser.username}</p>
-          </div>
-        );
-      }
-    });
+    return (
+      <TableContainer component={Paper}>
+        <Table
+          sx={{ minWidth: 650, overflow: 'hidden' }}
+          aria-label='simple table'
+        >
+          <TableHead>
+            <TableRow>
+              <TableCell sx={{ fontWeight: 'bold' }} align='left'>
+                For Item
+              </TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }} align='left'>
+                Message
+              </TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }} align='left'>
+                From
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {inbox.map((message) => (
+              <TableRow
+                key={message._id}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell align='left'>{message.post.title}</TableCell>
+                <TableCell align='left'>{message.content}</TableCell>
+                <TableCell align='left'>{message.fromUser.username}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    );
   };
 
-  const handleSentMessages = () => {
-    return messages.map((message, index) => {
-      if (username === message.fromUser.username) {
-        return (
-          <div key={index} className='messages'>
-            <p>For Item: {message.post.title}</p>
-            <p>Message: {message.content}</p>
-          </div>
-        );
-      }
-    });
+  const getOutbox = async () => {
+    const response = await fetchProfile(localStorageToken);
+    const messages = response.data.messages;
+    const filteredMessages = messages.filter(
+      (message) => message.fromUser.username === username
+    );
+
+    setOutbox(filteredMessages);
+  };
+
+  const handleOutbox = () => {
+    return (
+      <TableContainer component={Paper}>
+        <Table
+          sx={{ minWidth: 650, overflow: 'hidden' }}
+          aria-label='simple table'
+        >
+          <TableHead>
+            <TableRow>
+              <TableCell sx={{ fontWeight: 'bold' }} align='left'>
+                For Item
+              </TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }} align='left'>
+                Message
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {outbox.map((message) => (
+              <TableRow
+                key={message._id}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell align='left'>{message.post.title}</TableCell>
+                <TableCell align='left'>{message.content}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    );
   };
 
   useEffect(() => {
-    getMessages();
-  }, []);
+    getInbox();
+    getOutbox();
+  }, [username]);
 
   return (
-    <div id='message-list'>
+    <div id='mymessages-page'>
       <h2>Inbox</h2>
-      {messages.length === 0 ? 'You have no messages' : handleInbox()}
-      <h2>Sent Messages</h2>
-      {handleSentMessages()}
+      {inbox.length === 0 ? `You have no messages` : handleInbox()}
+      <h2>Outbox</h2>
+      {outbox.length === 0 ? `You have no messages` : handleOutbox()}
     </div>
   );
 };

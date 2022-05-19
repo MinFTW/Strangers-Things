@@ -5,25 +5,13 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { useEffect } from 'react';
 import { fetchPosts } from '../api';
 import { MessageDialog } from './index';
 import '../css/PostList.css';
 
-const PostList = ({ token, posts, setPosts }) => {
-  // const [page, setPage] = React.useState(0);
-  // const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-  // const handleChangePage = (event, newPage) => {
-  //   setPage(newPage);
-  // };
-
-  // const handleChangeRowsPerPage = (event) => {
-  //   setRowsPerPage(+event.target.value);
-  //   setPage(0);
-  // };
+const PostList = ({ token, posts, setPosts, username }) => {
 
   useEffect(() => {
     const renderPosts = async () => {
@@ -59,11 +47,12 @@ const PostList = ({ token, posts, setPosts }) => {
                 <TableCell sx={{ fontWeight: 'bold' }} align='right'>
                   Date Posted
                 </TableCell>
-                <TableCell sx={{ fontWeight: 'bold' }} align='right'>
+                {token && <TableCell sx={{ fontWeight: 'bold' }} align='right'>
                   Send a Message
-                </TableCell>
+                </TableCell>}
               </TableRow>
             </TableHead>
+
             <TableBody>
               {posts.reverse().map((post) => (
                 <TableRow
@@ -90,22 +79,14 @@ const PostList = ({ token, posts, setPosts }) => {
                       post.createdAt.slice(0, 4)}
                   </TableCell>
                   <TableCell align='right'>
-                    {token && <MessageDialog token={token} post={post} />}
+                    {token && post.author.username !== username && <MessageDialog token={token} post={post} />}
                   </TableCell>
                 </TableRow>
               ))}
             </TableBody>
+            
           </Table>
         </TableContainer>
-        {/* <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={posts.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      /> */}
       </Paper>
     </div>
   );
