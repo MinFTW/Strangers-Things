@@ -1,25 +1,7 @@
-#post-list {
-  overflow-y: scroll;
-  margin-top: 1rem;
-  padding: 0.5rem;
-  height: 77vh;
+#post-list-container {
+  height: 79vh;
 }
 
-.posts {
-  border-top: solid #fa7458;
-  margin-bottom: 1rem;
-  padding: 0.3rem;
-  width: 50%;
-}
-
-#send-message-button {
-  margin-top: 0.5rem;
-}
-
-#send-message-button:active {
+#dialog-message:active {
   transform: translateY(0.3vh);
-}
-
-#dialog-message {
-  margin-top: 0.5rem;
 }

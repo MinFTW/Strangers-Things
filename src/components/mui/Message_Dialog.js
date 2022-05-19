@@ -32,7 +32,7 @@ export default function FormDialog({ token, post }) {
   return (
     <div>
       <Button id='dialog-message' variant='contained' onClick={handleClickOpen}>
-        Send a message
+        Message
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Send a message</DialogTitle>

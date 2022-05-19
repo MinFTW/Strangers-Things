@@ -68,6 +68,7 @@ const Navbar = ({ token, setToken, setUsername, setPassword }) => {
           onClick={() => {
             setToken('');
             localStorage.removeItem('token');
+            localStorage.removeItem('username');
             setUsername('');
             setPassword('');
             history.push('/home');
