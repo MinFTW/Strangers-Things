@@ -6,23 +6,43 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { fetchPosts } from '../api';
 import { MessageDialog } from './index';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
 import '../css/PostList.css';
 
 const PostList = ({ token, posts, setPosts, username }) => {
+  const [searchTerm, setSearchTerm] = useState('');
 
-  useEffect(() => {
-    const renderPosts = async () => {
-      const result = await fetchPosts();
-      setPosts(result);
-    };
-    renderPosts();
-  }, []);
+  const handleSearch = () => {
+    const filteredPosts = posts.filter(
+      (post) =>
+        post.title.toLowerCase().includes(searchTerm) ||
+        post.description.toLowerCase().includes(searchTerm) ||
+        post.location.toLowerCase().includes(searchTerm) ||
+        post.author.username.toLowerCase().includes(searchTerm)
+    );
+    return filteredPosts.map((post, index) => {
+      return (
+        <div id='searched-posts' key={index}>
+          <p>Item: {post.title}</p>
+          <p>Description: {post.description}</p>
+          <p>Price: {post.price}</p>
+          <p>
+            Location:{' '}
+            {post.location === '[On Request]' ? 'On Request' : post.location}
+          </p>
+          <p>Username: {post.author.username}</p>
+          <MessageDialog />
+        </div>
+      );
+    });
+  };
 
-  return (
-    <div id='post-list-container'>
+  const renderAllPosts = () => {
+    return (
       <Paper sx={{ width: '100%', height: '100%', overflow: 'hidden' }}>
         <TableContainer sx={{ maxHeight: '100%' }}>
           <Table stickyHeader aria-label='sticky table'>
@@ -47,9 +67,11 @@ const PostList = ({ token, posts, setPosts, username }) => {
                 <TableCell sx={{ fontWeight: 'bold' }} align='right'>
                   Date Posted
                 </TableCell>
-                {token && <TableCell sx={{ fontWeight: 'bold' }} align='right'>
-                  Send a Message
-                </TableCell>}
+                {token && (
+                  <TableCell sx={{ fontWeight: 'bold' }} align='right'>
+                    Send a Message
+                  </TableCell>
+                )}
               </TableRow>
             </TableHead>
 
@@ -79,15 +101,50 @@ const PostList = ({ token, posts, setPosts, username }) => {
                       post.createdAt.slice(0, 4)}
                   </TableCell>
                   <TableCell align='right'>
-                    {token && post.author.username !== username && <MessageDialog token={token} post={post} />}
+                    {token && post.author.username !== username && (
+                      <MessageDialog token={token} post={post} />
+                    )}
                   </TableCell>
                 </TableRow>
               ))}
             </TableBody>
-            
           </Table>
         </TableContainer>
       </Paper>
+    );
+  };
+
+  useEffect(() => {
+    const renderPosts = async () => {
+      const result = await fetchPosts();
+      setPosts(result);
+    };
+    renderPosts();
+  }, []);
+
+  return (
+    <div id='post-list-container'>
+      <span id='search-container'>
+        <Box
+          component='form'
+          sx={{
+            '& > :not(style)': { m: 1, width: '25ch' },
+          }}
+          noValidate
+          autoComplete='off'
+          id='search-box'
+        >
+          <TextField
+            id='outlined-basic'
+            label='Search Posts'
+            variant='outlined'
+            onChange={(event) => {
+              setSearchTerm(event.target.value);
+            }}
+          />
+        </Box>
+      </span>
+      {searchTerm ? handleSearch() : renderAllPosts()}
     </div>
   );
 };

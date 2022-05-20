@@ -187,9 +187,17 @@ const MyPosts = ({ token, localStorageToken }) => {
   return (
     <div id='mymessages-page'>
       <h2>Active Posts</h2>
-      {activePosts.length === 0 ? `You have no posts` : handleActivePosts()}
+      {activePosts.length === 0 ? (
+        <p id='no-posts'>You have no posts</p>
+      ) : (
+        handleActivePosts()
+      )}
       <h2>Deleted Posts</h2>
-      {deletedPosts.length === 0 ? `You have no posts` : handleDeletedPosts()}
+      {deletedPosts.length === 0 ? (
+        <p id='no-posts'>You have no posts</p>
+      ) : (
+        handleDeletedPosts()
+      )}
     </div>
   );
 };

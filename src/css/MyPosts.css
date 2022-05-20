@@ -2,6 +2,10 @@
   overflow: scroll;
 }
 
+#no-posts {
+  margin-left: 1rem;
+}
+
 #delete-post-button:active {
   transform: translateY(0.3vh);
 }

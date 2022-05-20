@@ -45,7 +45,7 @@ const MyMessages = ({ localStorageToken, username }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {inbox.map((message) => (
+            {inbox.reverse().map((message) => (
               <TableRow
                 key={message._id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -89,7 +89,7 @@ const MyMessages = ({ localStorageToken, username }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {outbox.map((message) => (
+            {outbox.reverse().map((message) => (
               <TableRow
                 key={message._id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -112,9 +112,17 @@ const MyMessages = ({ localStorageToken, username }) => {
   return (
     <div id='mymessages-page'>
       <h2>Inbox</h2>
-      {inbox.length === 0 ? `You have no messages` : handleInbox()}
+      {inbox.length === 0 ? (
+        <p id='empty-inbox-outbox'>You have no messages</p>
+      ) : (
+        handleInbox()
+      )}
       <h2>Outbox</h2>
-      {outbox.length === 0 ? `You have no messages` : handleOutbox()}
+      {outbox.length === 0 ? (
+        <p id='empty-inbox-outbox'>You have no messages</p>
+      ) : (
+        handleOutbox()
+      )}
     </div>
   );
 };

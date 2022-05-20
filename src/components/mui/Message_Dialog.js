@@ -7,7 +7,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 
-export default function FormDialog({ token, post }) {
+export default function MessageDialog({ token, post }) {
   const [open, setOpen] = useState(false);
   const [content, setContent] = useState('');
 

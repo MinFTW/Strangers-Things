@@ -1,5 +1,9 @@
 #mymessages-page {
-  height: 79vh
+  height: 79vh;
+}
+
+#empty-inbox-outbox {
+  margin-left: 1rem;
 }
 
 h2 {

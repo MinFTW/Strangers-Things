@@ -2,6 +2,37 @@
   height: 79vh;
 }
 
+#post-list-container {
+  overflow: scroll;
+}
+
+#dialog-message {
+  margin-top: 0.5rem;
+}
+
 #dialog-message:active {
   transform: translateY(0.3vh);
+}
+
+#post-list-container::-webkit-scrollbar {
+  display: none;
+}
+
+#post-list-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+#search-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: start;
+  align-items: center;
+}
+
+#searched-posts {
+  border: solid #fa7458;
+  margin: 1rem;
+  width: 50%;
+  padding: 0.5rem;
 }

@@ -14,10 +14,10 @@ import {
 } from './index';
 
 const App = () => {
-  const [posts, setPosts] = useState([]);
   const [token, setToken] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [posts, setPosts] = useState([]);
   const localStorageToken = localStorage.getItem('token');
   const localStorageUserName = localStorage.getItem('username');
 
@@ -37,7 +37,12 @@ const App = () => {
         />
         <Switch>
           <Route exact path='/posts'>
-            <PostList token={token} posts={posts} setPosts={setPosts} username={username} />
+            <PostList
+              token={token}
+              posts={posts}
+              setPosts={setPosts}
+              username={username}
+            />
           </Route>
 
           <Route exact path='/login'>
