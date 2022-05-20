@@ -111,6 +111,7 @@ const MyMessages = ({ localStorageToken, username }) => {
 
   return (
     <div id='mymessages-page'>
+      <h1 id='welcome'>Welcome {`${username}`}</h1>
       <h2>Inbox</h2>
       {inbox.length === 0 ? (
         <p id='empty-inbox-outbox'>You have no messages</p>

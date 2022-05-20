@@ -15,7 +15,7 @@ const Login = ({ setToken, username, setUsername, password, setPassword }) => {
       localStorage.setItem('username', username);
       localStorage.setItem('token', result.data.token);
       alert('Login successful');
-      history.push('/home');
+      history.push('/posts');
     } else {
       alert(`Username or password is incorrect, please try again`);
     }
