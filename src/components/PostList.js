@@ -24,9 +24,9 @@ const PostList = ({ token, posts, setPosts, username }) => {
         post.location.toLowerCase().includes(searchTerm) ||
         post.author.username.toLowerCase().includes(searchTerm)
     );
-    return filteredPosts.map((post, index) => {
+    return filteredPosts.map((post) => {
       return (
-        <div id='searched-posts' key={index}>
+        <div id='searched-posts' key={post._id}>
           <p>Item: {post.title}</p>
           <p>Description: {post.description}</p>
           <p>Price: {post.price}</p>
@@ -35,12 +35,12 @@ const PostList = ({ token, posts, setPosts, username }) => {
             {post.location === '[On Request]' ? 'On Request' : post.location}
           </p>
           <p>Username: {post.author.username}</p>
-          <MessageDialog />
+          {token && <MessageDialog />}
         </div>
       );
     });
   };
-
+  
   const renderAllPosts = () => {
     return (
       <Paper sx={{ width: '100%', height: '100%', overflow: 'hidden' }}>

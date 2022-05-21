@@ -19,14 +19,14 @@ const Register = ({ setToken }) => {
       const result = await registerUser(username, password);
 
       if (result.data == null) {
-        return alert('User already registered, please login instead');
+        return alert(`${result.error.message}`);
       }
 
       setToken(result.data.token);
       localStorage.setItem('token', result.data.token);
-      alert('Thanks for signing up!');
+      alert(`${result.data.message}`);
       await loginUser(username, password);
-      history.push('/home');
+      history.push('/posts');
     }
   };
 

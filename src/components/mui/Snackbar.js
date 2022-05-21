@@ -37,7 +37,7 @@ export default function SimpleSnackbar() {
 
   return (
     <div>
-      <Button onClick={handleClick} variant='contained'>Open simple snackbar</Button>
+      {/* <Button onClick={handleClick} variant='contained'>Open simple snackbar</Button> */}
       <Snackbar
         open={open}
         autoHideDuration={6000}

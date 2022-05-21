@@ -14,10 +14,10 @@ const Login = ({ setToken, username, setUsername, password, setPassword }) => {
       setToken(result.data.token);
       localStorage.setItem('username', username);
       localStorage.setItem('token', result.data.token);
-      alert('Login successful');
+      alert(`${result.data.message}`);
       history.push('/posts');
     } else {
-      alert(`Username or password is incorrect, please try again`);
+      alert(`${result.error.message}`);
     }
   };
 
@@ -26,7 +26,7 @@ const Login = ({ setToken, username, setUsername, password, setPassword }) => {
       <fieldset id='login-form'>
         <legend>Login</legend>
         <form
-          onSubmit={async (event) => {
+          onSubmit={(event) => {
             event.preventDefault();
             handleLogin();
           }}

@@ -22,6 +22,7 @@ const MyPosts = ({ token, localStorageToken }) => {
     if (confirmDelete) {
       await deletePost(token, postId);
       getActivePosts();
+      getDeletedPosts()
     }
   };
 
