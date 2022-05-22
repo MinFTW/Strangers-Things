@@ -10,7 +10,12 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
-export default function UpdateDialog({ token, post, getActivePosts }) {
+export default function UpdateDialog({
+  token,
+  post,
+  getActivePosts,
+  setToast,
+}) {
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState(post.title);
   const [description, setDescription] = useState(post.description);
@@ -41,7 +46,7 @@ export default function UpdateDialog({ token, post, getActivePosts }) {
       console.error(error);
     }
 
-    alert('Post updated successfully');
+    setToast(true);
     handleClose();
     getActivePosts();
   };

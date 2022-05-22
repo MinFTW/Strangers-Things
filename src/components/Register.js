@@ -2,24 +2,28 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { registerUser, loginUser } from '../api';
 import Button from '@mui/material/Button';
+import { Alert } from '@mui/material';
 import '../css/Register.css';
 
 const Register = ({ setToken }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordToast, setPasswordToast] = useState(false);
+  const [usernameToast, setUsernameToast] = useState(false);
+
   let history = useHistory();
 
   const checkPassword = async () => {
     if (password !== confirmPassword) {
-      return alert('Passwords do not match');
+      return setPasswordToast(true);
     }
 
     if (username && password === confirmPassword) {
       const result = await registerUser(username, password);
 
       if (result.data == null) {
-        return alert(`${result.error.message}`);
+        return setUsernameToast(true);
       }
 
       setToken(result.data.token);
@@ -101,6 +105,30 @@ const Register = ({ setToken }) => {
           </Button>
         </form>
       </fieldset>
+      {passwordToast && (
+        <Alert
+          severity='warning'
+          variant='filled'
+          className='registration-alert'
+          onClose={() => {
+            setPasswordToast(false);
+          }}
+        >
+          Passwords do not match
+        </Alert>
+      )}
+      {usernameToast && (
+        <Alert
+          severity='warning'
+          variant='filled'
+          className='registration-alert'
+          onClose={() => {
+            setUsernameToast(false);
+          }}
+        >
+          Username already exists, please login instead
+        </Alert>
+      )}
     </div>
   );
 };

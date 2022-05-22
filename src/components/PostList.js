@@ -11,10 +11,12 @@ import { fetchPosts } from '../api';
 import { MessageDialog } from './index';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
+import { Alert } from '@mui/material';
 import '../css/PostList.css';
 
 const PostList = ({ token, posts, setPosts, username }) => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [toast, setToast] = useState(false);
 
   const handleSearch = () => {
     const filteredPosts = posts.filter(
@@ -35,12 +37,12 @@ const PostList = ({ token, posts, setPosts, username }) => {
             {post.location === '[On Request]' ? 'On Request' : post.location}
           </p>
           <p>Username: {post.author.username}</p>
-          {token && <MessageDialog />}
+          {token && <MessageDialog token={token} post={post} setToast={setToast}/>}
         </div>
       );
     });
   };
-  
+
   const renderAllPosts = () => {
     return (
       <Paper sx={{ width: '100%', height: '100%', overflow: 'hidden' }}>
@@ -102,7 +104,7 @@ const PostList = ({ token, posts, setPosts, username }) => {
                   </TableCell>
                   <TableCell align='right'>
                     {token && post.author.username !== username && (
-                      <MessageDialog token={token} post={post} />
+                      <MessageDialog token={token} post={post} setToast={setToast}/>
                     )}
                   </TableCell>
                 </TableRow>
@@ -124,7 +126,7 @@ const PostList = ({ token, posts, setPosts, username }) => {
 
   return (
     <div id='post-list-container'>
-      <span id='search-container'>
+      <div id='search-container'>
         <Box
           component='form'
           sx={{
@@ -135,15 +137,23 @@ const PostList = ({ token, posts, setPosts, username }) => {
           id='search-box'
         >
           <TextField
-            id='outlined-basic'
             label='Search Posts'
             variant='outlined'
             onChange={(event) => {
               setSearchTerm(event.target.value);
             }}
           />
+          {toast && <Alert
+            severity='success'
+            variant='filled'
+            onClose={() => {
+              setToast(false);
+            }}
+          >
+            Message Sent
+          </Alert>}
         </Box>
-      </span>
+      </div>
       {searchTerm ? handleSearch() : renderAllPosts()}
     </div>
   );

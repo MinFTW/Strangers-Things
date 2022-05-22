@@ -1,49 +1,27 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
+import { useHistory } from 'react-router-dom';
 import Snackbar from '@mui/material/Snackbar';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
 
 export default function SimpleSnackbar() {
-  const [open, setOpen] = React.useState(false);
-
-  const handleClick = () => {
-    setOpen(true);
-  };
-
-  const handleClose = (event, reason) => {
+  const [open, setOpen] = React.useState(true);
+  let history = useHistory();
+    
+  const handleClose = (reason) => {
     if (reason === 'clickaway') {
       return;
     }
 
     setOpen(false);
+    history.push('/posts');
   };
-
-  const action = (
-    <React.Fragment>
-      {/* <Button color='secondary' size='small' onClick={handleClose}>
-        UNDO
-      </Button> */}
-      <IconButton
-        size='small'
-        aria-label='close'
-        color='inherit'
-        onClick={handleClose}
-      >
-        <CloseIcon fontSize='small' />
-      </IconButton>
-    </React.Fragment>
-  );
 
   return (
     <div>
-      {/* <Button onClick={handleClick} variant='contained'>Open simple snackbar</Button> */}
       <Snackbar
         open={open}
-        autoHideDuration={6000}
+        autoHideDuration={1500}
         onClose={handleClose}
-        message='Login successful'
-        action={action}
+        message="Post created successfully"
       />
     </div>
   );

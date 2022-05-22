@@ -13,3 +13,8 @@
 #dialog-update-post:active {
   transform: translateY(0.3vh);
 }
+
+#toast-update {
+  margin: 0 auto;
+  width: fit-content;
+}

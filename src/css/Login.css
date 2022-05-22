@@ -25,3 +25,8 @@
 #login-button:active {
   transform: translateY(0.3vh);
 }
+
+#login-alert {
+  margin: 0 auto;
+  width: fit-content;
+}

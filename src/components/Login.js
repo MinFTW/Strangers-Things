@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { loginUser } from '../api';
 import Button from '@mui/material/Button';
+import { Alert } from '@mui/material';
 import '../css/Login.css';
 
 const Login = ({ setToken, username, setUsername, password, setPassword }) => {
+  const [toast, setToast] = useState(false);
   let history = useHistory();
 
   const handleLogin = async () => {
@@ -14,10 +16,9 @@ const Login = ({ setToken, username, setUsername, password, setPassword }) => {
       setToken(result.data.token);
       localStorage.setItem('username', username);
       localStorage.setItem('token', result.data.token);
-      alert(`${result.data.message}`);
-      history.push('/posts');
+      history.push('/mymessages');
     } else {
-      alert(`${result.error.message}`);
+      setToast(true);
     }
   };
 
@@ -69,6 +70,11 @@ const Login = ({ setToken, username, setUsername, password, setPassword }) => {
           </Button>
         </form>
       </fieldset>
+      {toast && (
+        <Alert id='login-alert' severity='warning' variant='filled' onClose={() => {setToast(false)}}>
+          Username or password is incorrect, please try again
+        </Alert>
+      )}
     </div>
   );
 };

@@ -7,7 +7,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 
-export default function MessageDialog({ token, post }) {
+export default function MessageDialog({ token, post, setToast }) {
   const [open, setOpen] = useState(false);
   const [content, setContent] = useState('');
 
@@ -23,7 +23,7 @@ export default function MessageDialog({ token, post }) {
     const result = await fetchMessages(token, post._id, content);
 
     if (result) {
-      alert('Message sent successfully');
+      setToast(true);
     }
 
     handleClose();

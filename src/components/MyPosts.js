@@ -10,11 +10,13 @@ import { useEffect, useState } from 'react';
 import { fetchProfile, deletePost } from '../api';
 import { UpdateDialog } from './index';
 import { Button } from '@mui/material';
+import { Alert } from '@mui/material';
 import '../css/MyPosts.css';
 
 const MyPosts = ({ token, localStorageToken }) => {
   const [activePosts, setActivePosts] = useState([]);
   const [deletedPosts, setDeletedPosts] = useState([]);
+  const [toast, setToast] = useState(false);
 
   const handleDeletePost = async (userPosts) => {
     const postId = userPosts._id;
@@ -22,7 +24,7 @@ const MyPosts = ({ token, localStorageToken }) => {
     if (confirmDelete) {
       await deletePost(token, postId);
       getActivePosts();
-      getDeletedPosts()
+      getDeletedPosts();
     }
   };
 
@@ -86,6 +88,7 @@ const MyPosts = ({ token, localStorageToken }) => {
                 <TableCell align='right'>
                   {
                     <UpdateDialog
+                      setToast={setToast}
                       post={post}
                       token={token}
                       getActivePosts={getActivePosts}
@@ -193,6 +196,20 @@ const MyPosts = ({ token, localStorageToken }) => {
       ) : (
         handleActivePosts()
       )}
+      <div id='toast-update'>
+        {toast && (
+          <Alert
+            severity='success'
+            variant='filled'
+            onClose={() => {
+              setToast(false);
+            }}
+          >
+            Update successful
+          </Alert>
+        )}
+      </div>
+      <br />
       <h2>Deleted Posts</h2>
       {deletedPosts.length === 0 ? (
         <p id='no-posts'>You have no posts</p>
