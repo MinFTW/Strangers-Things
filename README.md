@@ -1,2 +1,2 @@
-## Tech:
+## Tech Stack:
 - React
