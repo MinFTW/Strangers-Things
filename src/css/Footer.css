@@ -21,3 +21,13 @@ footer img {
   width: 50px;
   border-radius: 50%;
 }
+
+@media screen and (max-width: 375px) {
+  footer {
+    justify-content: center;
+    height: 15vh;
+  }
+  footer p {
+    margin-right: 0;
+  }
+}
