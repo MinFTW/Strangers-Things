@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Button } from '@mui/material';
+import { CurrencyExchangeIcon } from '../icons';
 import '../css/Navbar.css';
 import {
   HomeIcon,
@@ -17,67 +18,79 @@ const Navbar = ({ token, setToken, setUsername, setPassword }) => {
 
   return (
     <nav>
-      <Link className='navbar' to='/home'>
-        Home
-        <HomeIcon id='icon-home' />
+      <Link to='/home' className='title'>
+        <h1>
+          <CurrencyExchangeIcon
+            id='icon-logo'
+            sx={{ fontSize: 60, position: 'relative', top: '15px' }}
+          />
+          tranger's Things
+        </h1>
       </Link>
 
-      <Link className='navbar' to='/posts'>
-        Posts
-        <FormatListBulletedIcon id='icon-list' />
-      </Link>
-
-      {!token && (
-        <Link className='navbar' to='/login'>
-          Login
-          <LoginIcon id='icon-login' />
+      <div>
+        <Link className='nav-link' to='/home'>
+          Home
+          <HomeIcon className='link-icons' />
         </Link>
-      )}
 
-      {token && (
-        <Link className='navbar' to='/newpost'>
-          Add New Post
-          <PostAddIcon id='icon-addpost' />
+        <Link className='nav-link' to='/posts'>
+          Posts
+          <FormatListBulletedIcon className='link-icons' />
         </Link>
-      )}
 
-      {token && (
-        <Link className='navbar' to='/myposts'>
-          My Posts
-          <FaceIcon id='icon-myposts' />
-        </Link>
-      )}
+        {!token && (
+          <Link className='nav-link' to='/login'>
+            Login
+            <LoginIcon className='link-icons' />
+          </Link>
+        )}
 
-      {token && (
-        <Link className='navbar' to='/mymessages'>
-          My Messages
-          <MailIcon id='icon-mymessages' />
-        </Link>
-      )}
+        {token && (
+          <Link className='nav-link' to='/newpost'>
+            Add New Post
+            <PostAddIcon className='link-icons' />
+          </Link>
+        )}
 
-      {!token && (
-        <Link id='link-register' className='navbar' to='/register'>
-          Create Account
-        </Link>
-      )}
+        {token && (
+          <Link className='nav-link' to='/myposts'>
+            My Posts
+            <FaceIcon className='link-icons' />
+          </Link>
+        )}
 
-      {token && (
-        <Button
-          id='logout-button'
-          className='navbar'
-          onClick={() => {
-            setToken('');
-            localStorage.removeItem('token');
-            localStorage.removeItem('username');
-            setUsername('');
-            setPassword('');
-            history.push('/home');
-          }}
-        >
-          Logout
-          <LogoutIcon />
-        </Button>
-      )}
+        {token && (
+          <Link className='nav-link' to='/mymessages'>
+            My Messages
+            <MailIcon className='link-icons' />
+          </Link>
+        )}
+
+        {!token && (
+          <Link id='link-register' className='nav-link' to='/register'>
+            Create Account
+          </Link>
+        )}
+
+        {token && (
+          <Button
+            id='logout-button'
+            className='nav-link'
+            onClick={() => {
+              setToken('');
+              localStorage.removeItem('token');
+              localStorage.removeItem('username');
+              setUsername('');
+              setPassword('');
+              history.push('/home');
+            }}
+          >
+            Logout
+            <LogoutIcon sx={{ marginLeft: '5px' }} />
+          </Button>
+        )}
+      </div>
     </nav>
   );
 };

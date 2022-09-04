@@ -8,7 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { useState, useEffect } from 'react';
 import { fetchPosts } from '../api';
-import { MessageDialog } from './index';
+import { MessageDialog } from '../components';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import { Alert } from '@mui/material';
@@ -37,7 +37,9 @@ const PostList = ({ token, posts, setPosts, username }) => {
             {post.location === '[On Request]' ? 'On Request' : post.location}
           </p>
           <p>Username: {post.author.username}</p>
-          {token && <MessageDialog token={token} post={post} setToast={setToast}/>}
+          {token && (
+            <MessageDialog token={token} post={post} setToast={setToast} />
+          )}
         </div>
       );
     });
@@ -104,7 +106,11 @@ const PostList = ({ token, posts, setPosts, username }) => {
                   </TableCell>
                   <TableCell align='right'>
                     {token && post.author.username !== username && (
-                      <MessageDialog token={token} post={post} setToast={setToast}/>
+                      <MessageDialog
+                        token={token}
+                        post={post}
+                        setToast={setToast}
+                      />
                     )}
                   </TableCell>
                 </TableRow>
@@ -143,15 +149,17 @@ const PostList = ({ token, posts, setPosts, username }) => {
               setSearchTerm(event.target.value);
             }}
           />
-          {toast && <Alert
-            severity='success'
-            variant='filled'
-            onClose={() => {
-              setToast(false);
-            }}
-          >
-            Message Sent
-          </Alert>}
+          {toast && (
+            <Alert
+              severity='success'
+              variant='filled'
+              onClose={() => {
+                setToast(false);
+              }}
+            >
+              Message Sent
+            </Alert>
+          )}
         </Box>
       </div>
       {searchTerm ? handleSearch() : renderAllPosts()}

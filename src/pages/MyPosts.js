@@ -8,7 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useEffect, useState } from 'react';
 import { fetchProfile, deletePost } from '../api';
-import { UpdateDialog } from './index';
+import { UpdateDialog } from '../components';
 import { Button } from '@mui/material';
 import { Alert } from '@mui/material';
 import '../css/MyPosts.css';

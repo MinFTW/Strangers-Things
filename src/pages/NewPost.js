@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { createPost } from '../api';
-import { Snackbar } from './index';
+import { Snackbar } from '../components';
 import Button from '@mui/material/Button';
 import '../css/NewPost.css';
 

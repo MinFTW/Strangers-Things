@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { updatePost } from '../../api';
+import { updatePost } from '../api';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';

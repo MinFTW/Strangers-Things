@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import '../css/App.css';
+import './css/App.css';
+import { Navbar, Footer } from './components/';
 import {
-  Title,
+  Home,
   PostList,
   Register,
   Login,
-  MyPosts,
   NewPost,
+  MyPosts,
   MyMessages,
-  Footer,
-  FrontPage,
-} from './index';
+} from './pages';
 
 const App = () => {
   const [token, setToken] = useState('');
@@ -29,7 +28,7 @@ const App = () => {
   return (
     <div id='app'>
       <Router>
-        <Title
+        <Navbar
           token={token}
           setToken={setToken}
           setUsername={setUsername}
@@ -76,7 +75,7 @@ const App = () => {
           </Route>
 
           <Route path='/'>
-            <FrontPage />
+            <Home />
           </Route>
         </Switch>
         <Footer />
