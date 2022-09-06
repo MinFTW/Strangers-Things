@@ -1,20 +1,29 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { registerUser, loginUser } from '../api';
-import Button from '@mui/material/Button';
 import { Alert } from '@mui/material';
-import '../css/Register.css';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
 
 const Register = ({ setToken }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordToast, setPasswordToast] = useState(false);
   const [usernameToast, setUsernameToast] = useState(false);
-
   let history = useHistory();
 
-  const checkPassword = async () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const input = new FormData(event.currentTarget);
+    const username = input.get('username');
+    const password = input.get('password');
+    const confirmPassword = input.get('confirmPassword');
+
     if (password !== confirmPassword) {
       return setPasswordToast(true);
     }
@@ -35,101 +44,114 @@ const Register = ({ setToken }) => {
   };
 
   return (
-    <div id='register-page'>
-      <fieldset id='register-form'>
-        <legend>Create New Account</legend>
-        <form
-          onSubmit={(event) => {
-            event.preventDefault();
-            checkPassword();
-          }}
-        >
-          <label htmlFor='username'>Username</label>
-          <div>
-            <input
-              type='text'
-              name='username'
-              placeholder='6 to 20 characters'
-              minLength='6'
-              maxLength='20'
-              required
-              value={username}
-              onChange={(event) => {
-                setUsername(event.target.value);
-              }}
-            ></input>
-          </div>
-
-          <div>
-            <div>
-              <label htmlFor='password'>Password</label>
-            </div>
-            <input
-              type='password'
-              name='password'
-              placeholder='6 to 20 characters'
-              minLength='6'
-              maxLength='20'
-              required
-              value={password}
-              onChange={(event) => {
-                setPassword(event.target.value);
-              }}
-            ></input>
-          </div>
-
-          <div>
-            <div>
-              <label htmlFor='confirmPassword'>Re-enter password</label>
-            </div>
-            <input
-              type='password'
-              name='confirmPassword'
-              minLength='6'
-              maxLength='20'
-              required
-              value={confirmPassword}
-              onChange={(event) => {
-                setConfirmPassword(event.target.value);
-              }}
-            ></input>
-          </div>
-
+    <Container component='main' maxWidth='xs'>
+      <CssBaseline />
+      <Box
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          height: '73vh',
+        }}
+      >
+        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component='h1' variant='h5'>
+          Sign up
+        </Typography>
+        <Box component='form' noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                id='username'
+                label='Username'
+                name='username'
+                autoComplete='username'
+                inputProps={{
+                  minLength: 6,
+                  maxLength: 20,
+                }}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                name='password'
+                label='Password'
+                type='password'
+                id='password'
+                autoComplete='new-password'
+                inputProps={{
+                  minLength: 6,
+                  maxLength: 20,
+                }}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                name='confirmPassword'
+                label='Confirm Password'
+                type='password'
+                id='confirmPassword'
+                autoComplete='new-password'
+                inputProps={{
+                  minLength: 6,
+                  maxLength: 20,
+                }}
+              />
+            </Grid>
+          </Grid>
           <Button
             type='submit'
-            id='register-button'
+            fullWidth
             variant='contained'
-            color='success'
+            sx={{ mt: 3, mb: 2 }}
           >
             Sign Up
           </Button>
-        </form>
-      </fieldset>
-      {passwordToast && (
-        <Alert
-          severity='warning'
-          variant='filled'
-          className='registration-alert'
-          onClose={() => {
-            setPasswordToast(false);
-          }}
-        >
-          Passwords do not match
-        </Alert>
-      )}
-      {usernameToast && (
-        <Alert
-          severity='warning'
-          variant='filled'
-          className='registration-alert'
-          onClose={() => {
-            setUsernameToast(false);
-          }}
-        >
-          Username already exists, please login instead
-        </Alert>
-      )}
-    </div>
+          <Grid container>
+            <Grid item xs>
+              <Link to='/login' variant='body2'>
+                {'Already have an account? Sign in'}
+              </Link>
+            </Grid>
+          </Grid>
+          {passwordToast && (
+            <Alert
+              severity='warning'
+              variant='filled'
+              className='registration-alert'
+              sx={{ marginTop: '1rem' }}
+              onClose={() => {
+                setPasswordToast(false);
+              }}
+            >
+              Passwords do not match
+            </Alert>
+          )}
+          {usernameToast && (
+            <Alert
+              severity='warning'
+              variant='filled'
+              className='registration-alert'
+              sx={{ marginTop: '1rem' }}
+              onClose={() => {
+                setUsernameToast(false);
+              }}
+            >
+              Username already exists
+            </Alert>
+          )}
+        </Box>
+      </Box>
+    </Container>
   );
 };
 

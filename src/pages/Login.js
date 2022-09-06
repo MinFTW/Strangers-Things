@@ -63,6 +63,10 @@ const Login = ({ setToken, username, setUsername }) => {
             name='username'
             autoComplete='username'
             autoFocus
+            inputProps={{
+              minLength: 6,
+              maxLength: 20,
+            }}
           />
           <TextField
             margin='normal'
@@ -73,6 +77,10 @@ const Login = ({ setToken, username, setUsername }) => {
             type='password'
             id='password'
             autoComplete='current-password'
+            inputProps={{
+              minLength: 6,
+              maxLength: 20,
+            }}
           />
           <Button
             type='submit'
