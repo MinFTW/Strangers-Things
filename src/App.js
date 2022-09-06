@@ -7,7 +7,7 @@ import {
   PostList,
   Register,
   Login,
-  NewPost,
+  CreatePost,
   MyPosts,
   MyMessages,
 } from './pages';
@@ -64,7 +64,7 @@ const App = () => {
           </Route>
 
           <Route exact path='/createpost'>
-            <NewPost token={token} />
+            <CreatePost token={token} />
           </Route>
 
           <Route exact path='/mymessages'>

@@ -1,19 +1,32 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { loginUser } from '../api';
-import Button from '@mui/material/Button';
 import { Alert } from '@mui/material';
-import '../css/Login.css';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
 
-const Login = ({ setToken, username, setUsername, password, setPassword }) => {
+const Login = ({ setToken, username, setUsername }) => {
   const [toast, setToast] = useState(false);
   let history = useHistory();
 
-  const handleLogin = async () => {
-    const result = await loginUser(username, password);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const input = new FormData(event.currentTarget);
+    const result = await loginUser(
+      input.get('username'),
+      input.get('password')
+    );
 
     if (result.data) {
       setToken(result.data.token);
+      setUsername(input.get('username'));
       localStorage.setItem('username', username);
       localStorage.setItem('token', result.data.token);
       history.push('/mymessages');
@@ -23,59 +36,75 @@ const Login = ({ setToken, username, setUsername, password, setPassword }) => {
   };
 
   return (
-    <div id='login-page'>
-      <fieldset id='login-form'>
-        <legend>Login</legend>
-        <form
-          onSubmit={(event) => {
-            event.preventDefault();
-            handleLogin();
-          }}
-        >
-          <label>Username</label>
-          <div>
-            <input
-              type='text'
-              minLength='6'
-              maxLength='20'
-              required
-              value={username}
-              onChange={(event) => {
-                setUsername(event.target.value);
-              }}
-            ></input>
-          </div>
-
-          <label>Password</label>
-          <div>
-            <input
-              type='password'
-              minLength='6'
-              maxLength='20'
-              required
-              value={password}
-              onChange={(event) => {
-                setPassword(event.target.value);
-              }}
-            ></input>
-          </div>
-
+    <Container component='main' maxWidth='xs'>
+      <CssBaseline />
+      <Box
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          height: '73vh',
+        }}
+      >
+        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component='h1' variant='h5'>
+          Sign in
+        </Typography>
+        <Box component='form' onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <TextField
+            margin='normal'
+            required
+            fullWidth
+            id='username'
+            label='Username'
+            name='username'
+            autoComplete='username'
+            autoFocus
+          />
+          <TextField
+            margin='normal'
+            required
+            fullWidth
+            name='password'
+            label='Password'
+            type='password'
+            id='password'
+            autoComplete='current-password'
+          />
           <Button
-            id='login-button'
             type='submit'
+            fullWidth
             variant='contained'
-            color='success'
+            sx={{ mt: 3, mb: 2 }}
           >
-            Login
+            Sign In
           </Button>
-        </form>
-      </fieldset>
-      {toast && (
-        <Alert id='login-alert' severity='warning' variant='filled' onClose={() => {setToast(false)}}>
-          Username or password is incorrect, please try again
-        </Alert>
-      )}
-    </div>
+          <Grid container>
+            <Grid item xs>
+              <Link to='/register' variant='body2'>
+                {"Don't have an account? Sign Up"}
+              </Link>
+            </Grid>
+          </Grid>
+          {toast && (
+            <Alert
+              id='login-alert'
+              severity='warning'
+              variant='filled'
+              sx={{ marginTop: '1rem' }}
+              onClose={() => {
+                setToast(false);
+              }}
+            >
+              Username or password is incorrect, please try again
+            </Alert>
+          )}
+        </Box>
+      </Box>
+    </Container>
   );
 };
 

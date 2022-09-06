@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { createPost } from '../api';
 import { Snackbar } from '../components';
 import Button from '@mui/material/Button';
-import '../css/NewPost.css';
+import '../css/CreatePost.css';
 
 const NewPost = ({ token }) => {
   const [title, setTitle] = useState('');
@@ -99,7 +99,7 @@ const NewPost = ({ token }) => {
             id='new-post-button'
             type='submit'
             variant='contained'
-            color='success'
+            color='primary'
           >
             Submit Post
           </Button>
