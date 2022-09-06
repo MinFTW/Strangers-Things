@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './css/App.css';
-import { Navbar, Footer } from './components/';
+import { Navbar, Footer } from './components';
 import {
   Home,
   PostList,
@@ -18,11 +18,11 @@ const App = () => {
   const [password, setPassword] = useState('');
   const [posts, setPosts] = useState([]);
   const localStorageToken = localStorage.getItem('token');
-  const localStorageUserName = localStorage.getItem('username');
+  const localStorageUsername = localStorage.getItem('username');
 
   useEffect(() => {
     localStorageToken && setToken(localStorageToken);
-    localStorageUserName && setUsername(localStorageUserName);
+    localStorageUsername && setUsername(localStorageUsername);
   }, [token]);
 
   return (
@@ -38,9 +38,9 @@ const App = () => {
           <Route exact path='/posts'>
             <PostList
               token={token}
+              username={username}
               posts={posts}
               setPosts={setPosts}
-              username={username}
             />
           </Route>
 
@@ -63,7 +63,7 @@ const App = () => {
             <MyPosts token={token} localStorageToken={localStorageToken} />
           </Route>
 
-          <Route exact path='/newpost'>
+          <Route exact path='/createpost'>
             <NewPost token={token} />
           </Route>
 

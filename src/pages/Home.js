@@ -4,7 +4,7 @@ import Container from '@mui/material/Container';
 
 const Home = () => {
   return (
-    <Container maxWidth={false}>
+    <Container maxWidth={false} className='home-image'>
       <Box
         sx={{
           bgcolor: '#f9f3ee',

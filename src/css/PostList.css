@@ -1,9 +1,26 @@
-#post-list-container {
-  height: 79vh;
+#search-box {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: center;
 }
 
-#post-list-container {
+.search-results {
+  border: solid #fa7458;
+  margin: 1rem;
+  width: 50%;
+  padding: 0.5rem;
+}
+
+#postlist-container {
+  height: 79vh;
   overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+#postlist-container::-webkit-scrollbar {
+  display: none;
 }
 
 #dialog-message {
@@ -12,27 +29,4 @@
 
 #dialog-message:active {
   transform: translateY(0.3vh);
-}
-
-#post-list-container::-webkit-scrollbar {
-  display: none;
-}
-
-#post-list-container {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-#search-container {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-#searched-posts {
-  border: solid #fa7458;
-  margin: 1rem;
-  width: 50%;
-  padding: 0.5rem;
 }

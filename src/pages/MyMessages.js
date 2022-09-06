@@ -17,9 +17,9 @@ const MyMessages = ({ localStorageToken, username }) => {
   const getInbox = async () => {
     const response = await fetchProfile(localStorageToken);
     const messages = response.data.messages;
-    const filteredMessages = messages.reverse().filter(
-      (message) => message.fromUser.username !== username
-    );
+    const filteredMessages = messages
+      .reverse()
+      .filter((message) => message.fromUser.username !== username);
 
     setInbox(filteredMessages);
   };
@@ -64,9 +64,9 @@ const MyMessages = ({ localStorageToken, username }) => {
   const getOutbox = async () => {
     const response = await fetchProfile(localStorageToken);
     const messages = response.data.messages;
-    const filteredMessages = messages.reverse().filter(
-      (message) => message.fromUser.username === username
-    );
+    const filteredMessages = messages
+      .reverse()
+      .filter((message) => message.fromUser.username === username);
 
     setOutbox(filteredMessages);
   };
@@ -89,7 +89,7 @@ const MyMessages = ({ localStorageToken, username }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {outbox.map((message) => (
+            {outbox.map((message, index) => (
               <TableRow
                 key={message._id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}

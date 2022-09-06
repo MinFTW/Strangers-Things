@@ -18,10 +18,9 @@ const Navbar = ({ token, setToken, setUsername, setPassword }) => {
 
   return (
     <nav>
-      <Link to='/home' className='title'>
+      <Link to='/home' className='nav-logo'>
         <h1>
           <CurrencyExchangeIcon
-            id='icon-logo'
             sx={{ fontSize: 60, position: 'relative', top: '15px' }}
           />
           tranger's Things
@@ -29,54 +28,54 @@ const Navbar = ({ token, setToken, setUsername, setPassword }) => {
       </Link>
 
       <div>
-        <Link className='nav-link' to='/home'>
+        <Link className='nav-links' to='/home'>
           Home
-          <HomeIcon className='link-icons' />
+          <HomeIcon className='nav-icons' />
         </Link>
 
-        <Link className='nav-link' to='/posts'>
+        <Link className='nav-links' to='/posts'>
           Posts
-          <FormatListBulletedIcon className='link-icons' />
+          <FormatListBulletedIcon className='nav-icons' />
         </Link>
 
         {!token && (
-          <Link className='nav-link' to='/login'>
+          <Link className='nav-links' to='/login'>
             Login
-            <LoginIcon className='link-icons' />
+            <LoginIcon className='nav-icons' />
           </Link>
         )}
 
         {token && (
-          <Link className='nav-link' to='/newpost'>
-            Add New Post
-            <PostAddIcon className='link-icons' />
+          <Link className='nav-links' to='/createpost'>
+            Create Post
+            <PostAddIcon className='nav-icons' />
           </Link>
         )}
 
         {token && (
-          <Link className='nav-link' to='/myposts'>
+          <Link className='nav-links' to='/myposts'>
             My Posts
-            <FaceIcon className='link-icons' />
+            <FaceIcon className='nav-icons' />
           </Link>
         )}
 
         {token && (
-          <Link className='nav-link' to='/mymessages'>
+          <Link className='nav-links' to='/mymessages'>
             My Messages
-            <MailIcon className='link-icons' />
+            <MailIcon className='nav-icons' />
           </Link>
         )}
 
         {!token && (
-          <Link id='link-register' className='nav-link' to='/register'>
+          <Link id='nav-register' className='nav-links' to='/register'>
             Create Account
           </Link>
         )}
 
         {token && (
           <Button
-            id='logout-button'
-            className='nav-link'
+            id='nav-logout'
+            className='nav-links'
             onClick={() => {
               setToken('');
               localStorage.removeItem('token');

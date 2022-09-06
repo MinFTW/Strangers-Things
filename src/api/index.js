@@ -1,7 +1,7 @@
 const BASE_URL = 'https://strangers-things.herokuapp.com';
 const COHORT = '2202-FTB-ET-WEB-PT';
 
-// POST FUNCTIONS //
+// POST END POINTS //
 export const fetchPosts = async () => {
   try {
     const response = await fetch(`${BASE_URL}/api/${COHORT}/posts`);
@@ -97,7 +97,7 @@ export const deletePost = async (token, postId) => {
   }
 };
 
-//  USER FUNCTIONS //
+//  USER END POINTS //
 export const registerUser = async (username, password) => {
   try {
     const response = await fetch(`${BASE_URL}/api/${COHORT}/users/register`, {
@@ -158,7 +158,7 @@ export const fetchProfile = async (token) => {
   }
 };
 
-//  MESSAGES FUNCTIONS //
+//  MESSAGES END POINTS //
 export const fetchMessages = async (token, postId, content) => {
   try {
     const response = await fetch(
