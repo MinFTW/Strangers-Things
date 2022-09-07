@@ -12,21 +12,20 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 
-const Login = ({ setToken, username, setUsername }) => {
+const Login = ({ setToken, setUsername }) => {
   const [toast, setToast] = useState(false);
   let history = useHistory();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const input = new FormData(event.currentTarget);
-    const result = await loginUser(
-      input.get('username'),
-      input.get('password')
-    );
+    const username = input.get('username');
+    const password = input.get('password');
+    const result = await loginUser(username, password);
 
     if (result.data) {
       setToken(result.data.token);
-      setUsername(input.get('username'));
+      setUsername(username);
       localStorage.setItem('username', username);
       localStorage.setItem('token', result.data.token);
       history.push('/mymessages');

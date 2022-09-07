@@ -1,20 +1,20 @@
-#new-post-page {
+#createpost-page {
   height: 79vh;
 }
 
-#new-post-form {
+#createpost-form {
   display: flex;
   justify-content: center;
   border: solid #fa7458;
   margin: 0 auto;
 
-  width: 25%;
-  padding: 0.5rem;
+  width: 20%;
+  padding: 1rem;
   font-size: 1.2rem;
-  margin-top: 2rem;
+  margin-top: 5rem;
 }
 
-#new-post-form textarea {
+#createpost-form textarea {
   resize: none;
   display: block;
   margin: 0 auto;
@@ -23,12 +23,12 @@
   margin-bottom: 0.5rem;
 }
 
-#new-post-form input {
+#createpost-form input {
   margin: 0.5rem;
   padding: 0.2rem;
 }
 
-#new-post-delivery {
+#createpost-delivery {
   display: flex;
   justify-content: space-evenly;
 
@@ -37,7 +37,7 @@
   margin-top: 1rem;
 }
 
-#new-post-button {
+#createpost-button {
   border-radius: 10px;
   font-size: 1rem;
   padding: 0.5rem;
@@ -45,6 +45,6 @@
   margin-bottom: 0.5rem;
 }
 
-#new-post-button:active {
+#createpost-button:active {
   transform: translateY(0.3vh);
 }

@@ -22,8 +22,8 @@ const NewPost = ({ token }) => {
   };
 
   return (
-    <div id='new-post-page'>
-      <fieldset id='new-post-form'>
+    <div id='createpost-page'>
+      <fieldset id='createpost-form'>
         <legend>New Post</legend>
         <form
           onSubmit={(event) => {
@@ -45,7 +45,6 @@ const NewPost = ({ token }) => {
 
           <div>
             <textarea
-              id='input-description'
               type='text'
               placeholder='Add description'
               maxLength='200'
@@ -81,7 +80,7 @@ const NewPost = ({ token }) => {
           </div>
 
           <div>
-            <fieldset id='new-post-delivery'>
+            <fieldset id='createpost-delivery'>
               <legend>Will Deliver? (optional)</legend>
               <label htmlFor='yes'>Yes</label>
               <input
@@ -96,12 +95,12 @@ const NewPost = ({ token }) => {
           </div>
 
           <Button
-            id='new-post-button'
+            id='createpost-button'
             type='submit'
             variant='contained'
             color='primary'
           >
-            Submit Post
+            Create Post
           </Button>
         </form>
       </fieldset>

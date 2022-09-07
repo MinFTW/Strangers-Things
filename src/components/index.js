@@ -4,4 +4,6 @@ export { default as Search } from './Search';
 export { default as Posts } from './Posts';
 export { default as MessageDialog } from './MessageDialog';
 export { default as UpdateDialog } from './UpdateDialog';
+export { default as Inbox } from './Inbox';
+export { default as Outbox } from './Outbox';
 export { default as Snackbar } from './Snackbar';

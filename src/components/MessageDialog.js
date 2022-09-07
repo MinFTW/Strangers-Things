@@ -21,17 +21,14 @@ export default function MessageDialog({ token, post, setToast }) {
 
   const handleSendMessage = async () => {
     const result = await fetchMessages(token, post._id, content);
-
-    if (result) {
-      setToast(true);
-    }
+    result && setToast(true);
 
     handleClose();
   };
 
   return (
-    <div>
-      <Button id='dialog-message' variant='contained' onClick={handleClickOpen}>
+    <>
+      <Button variant='contained' onClick={handleClickOpen}>
         Message
       </Button>
       <Dialog open={open} onClose={handleClose}>
@@ -46,6 +43,7 @@ export default function MessageDialog({ token, post, setToast }) {
             multiline
             variant='outlined'
             minLength='1'
+            maxLength='200'
             onChange={(event) => {
               setContent(event.target.value);
             }}
@@ -62,6 +60,6 @@ export default function MessageDialog({ token, post, setToast }) {
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </>
   );
 }

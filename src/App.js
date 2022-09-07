@@ -70,7 +70,7 @@ const App = () => {
           <Route exact path='/mymessages'>
             <MyMessages
               localStorageToken={localStorageToken}
-              username={username}
+              localStorageUsername={localStorageUsername}
             />
           </Route>
 

@@ -1,128 +1,46 @@
-import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { fetchProfile } from '../api';
+import { Inbox, Outbox } from '../components';
 import '../css/MyMessages.css';
 
-const MyMessages = ({ localStorageToken, username }) => {
+const MyMessages = ({ localStorageToken, localStorageUsername }) => {
   const [inbox, setInbox] = useState([]);
   const [outbox, setOutbox] = useState([]);
 
-  const getInbox = async () => {
+  const fetchMessages = async () => {
     const response = await fetchProfile(localStorageToken);
     const messages = response.data.messages;
-    const filteredMessages = messages
+
+    const inboxMessages = messages
       .reverse()
-      .filter((message) => message.fromUser.username !== username);
+      .filter((message) => message.fromUser.username !== localStorageUsername);
 
-    setInbox(filteredMessages);
-  };
-
-  const handleInbox = () => {
-    return (
-      <TableContainer component={Paper}>
-        <Table
-          sx={{ minWidth: 650, overflow: 'hidden' }}
-          aria-label='simple table'
-        >
-          <TableHead>
-            <TableRow>
-              <TableCell sx={{ fontWeight: 'bold' }} align='left'>
-                For Item
-              </TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }} align='left'>
-                Message
-              </TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }} align='left'>
-                From
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {inbox.map((message) => (
-              <TableRow
-                key={message._id}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell align='left'>{message.post.title}</TableCell>
-                <TableCell align='left'>{message.content}</TableCell>
-                <TableCell align='left'>{message.fromUser.username}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    );
-  };
-
-  const getOutbox = async () => {
-    const response = await fetchProfile(localStorageToken);
-    const messages = response.data.messages;
-    const filteredMessages = messages
+    const outboxMessages = messages
       .reverse()
-      .filter((message) => message.fromUser.username === username);
+      .filter((message) => message.fromUser.username === localStorageUsername);
 
-    setOutbox(filteredMessages);
-  };
-
-  const handleOutbox = () => {
-    return (
-      <TableContainer component={Paper}>
-        <Table
-          sx={{ minWidth: 650, overflow: 'hidden' }}
-          aria-label='simple table'
-        >
-          <TableHead>
-            <TableRow>
-              <TableCell sx={{ fontWeight: 'bold' }} align='left'>
-                For Item
-              </TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }} align='left'>
-                Message
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {outbox.map((message, index) => (
-              <TableRow
-                key={message._id}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell align='left'>{message.post.title}</TableCell>
-                <TableCell align='left'>{message.content}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    );
+    setInbox(inboxMessages);
+    setOutbox(outboxMessages);
   };
 
   useEffect(() => {
-    getInbox();
-    getOutbox();
-  }, [username]);
+    fetchMessages();
+  }, [localStorageToken]);
 
   return (
     <div id='mymessages-page'>
-      <h1 id='welcome'>Welcome {`${username}`}</h1>
-      <h2>Inbox</h2>
+      <h1 id='welcome'>Welcome {`${localStorageUsername}`}</h1>
+      <h2 className='mymessages-header'>Inbox</h2>
       {inbox.length === 0 ? (
-        <p id='empty-inbox-outbox'>You have no messages</p>
+        <p className='no-messages'>You don't have any messages</p>
       ) : (
-        handleInbox()
+        <Inbox inbox={inbox} />
       )}
-      <h2>Outbox</h2>
+      <h2 className='mymessages-header'>Outbox</h2>
       {outbox.length === 0 ? (
-        <p id='empty-inbox-outbox'>You have no messages</p>
+        <p className='no-messages'>You don't have any messages</p>
       ) : (
-        handleOutbox()
+        <Outbox outbox={outbox} />
       )}
     </div>
   );
