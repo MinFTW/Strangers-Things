@@ -60,7 +60,7 @@ const App = () => {
           </Route>
 
           <Route exact path='/myposts'>
-            <MyPosts token={token} localStorageToken={localStorageToken} />
+            <MyPosts localStorageToken={localStorageToken} />
           </Route>
 
           <Route exact path='/createpost'>

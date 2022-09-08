@@ -11,9 +11,9 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
 export default function UpdateDialog({
-  token,
+  localStorageToken,
   post,
-  getActivePosts,
+  fetchPosts,
   setToast,
 }) {
   const [open, setOpen] = useState(false);
@@ -34,7 +34,7 @@ export default function UpdateDialog({
   const handleUpdate = async () => {
     try {
       await updatePost(
-        token,
+        localStorageToken,
         post._id,
         title,
         description,
@@ -48,7 +48,7 @@ export default function UpdateDialog({
 
     setToast(true);
     handleClose();
-    getActivePosts();
+    fetchPosts();
   };
 
   const handleCheckbox = () => {

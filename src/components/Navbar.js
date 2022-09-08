@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Button } from '@mui/material';
-import { CurrencyExchangeIcon } from '../icons';
 import '../css/Navbar.css';
 import {
+  CurrencyExchangeIcon,
   HomeIcon,
   FormatListBulletedIcon,
   PostAddIcon,
